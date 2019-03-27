@@ -1,8 +1,8 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.3.48:3306/crevaluedb?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
-    username: crevalue
+    url: jdbc:mysql://192.168.3.48:3306/classdb?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    username: admin
     password: oywnOVUY1QH4Y
     sql-script-encoding: UTF-8
   jackson:
@@ -53,20 +53,20 @@ logging:
   level:
     cn:
       cityre:
-        crevalue:
+        admin:
           mapper: debug
 
 avs:
   api:
     api-key: 4IUFP6jkGPPNSmUUERNSn2
     city-house-http-prefix: http://api.cityhouse.cn
-    cre-value-http-prefix: http://api.crevalue.cn
-    cre-value-https-prefix: https://api.crevalue.cn
+    cre-value-http-prefix: http://api.admin.cn
+    cre-value-https-prefix: https://api.admin.cn
     cre-value-test-prefix: http://test.api.creprice.cn/
     batch-start-notify: SMS_148835071
     batch-finish-notify: SMS_157350532
   path:
-    base: /App/mnt/crevalue_open/avs/tenant/
+    base: /App/mnt/admin_open/avs/tenant/
     company: company/
     report-config: report-config/
     batch: batch/

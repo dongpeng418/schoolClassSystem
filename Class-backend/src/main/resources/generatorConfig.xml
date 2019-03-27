@@ -11,7 +11,7 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://10.10.80.32:3306/crevaluedb"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/crevaluedb"
                         userId="crevalue"
                         password="crevalue#">
         </jdbcConnection>
