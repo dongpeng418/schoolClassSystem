@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.school.classinfo.mapper.EvaluationBatchItemMapper">
+    <resultMap id="BaseResultMap" type="cn.com.school.classinfo.model.EvaluationBatchItem">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result property="tenantId" column="tenant_id" jdbcType="INTEGER"/>
+        <result property="companyId" column="company_id" jdbcType="INTEGER"/>
+        <result property="organizationId" column="organization_id" jdbcType="INTEGER"/>
+        <result property="batchId" column="batch_id" jdbcType="INTEGER"/>
+        <result property="evalState" column="eval_state" jdbcType="INTEGER"/>
+        <result property="cityCode" column="city_code" jdbcType="VARCHAR"/>
+        <result property="cityName" column="city_name" jdbcType="VARCHAR"/>
+        <result property="distCode" column="dist_code" jdbcType="VARCHAR"/>
+        <result property="distName" column="dist_name" jdbcType="VARCHAR"/>
+        <result property="buildNo" column="build_no" jdbcType="VARCHAR"/>
+        <result property="unit" column="unit" jdbcType="TIMESTAMP"/>
+        <result property="roomNo" column="room_no" jdbcType="TIMESTAMP"/>
+        <result property="propType" column="prop_type" jdbcType="TIMESTAMP"/>
+        <result property="bldgArea" column="bldg_area" jdbcType="FLOAT"/>
+        <result property="br" column="br" jdbcType="INTEGER"/>
+        <result property="lr" column="lr" jdbcType="INTEGER"/>
+        <result property="cr" column="cr" jdbcType="INTEGER"/>
+        <result property="ba" column="ba" jdbcType="INTEGER"/>
+        <result property="floor" column="floor" jdbcType="INTEGER"/>
+        <result property="bheight" column="bheight" jdbcType="TIMESTAMP"/>
+        <result property="faceCode" column="face_code" jdbcType="VARCHAR"/>
+        <result property="faceName" column="face_name" jdbcType="VARCHAR"/>
+        <result property="bldgTypeCode" column="bldg_type_code" jdbcType="VARCHAR"/>
+        <result property="bldgTypeName" column="bldg_type_name" jdbcType="VARCHAR"/>
+        <result property="buildYear" column="build_year" jdbcType="VARCHAR"/>
+        <result property="intdecoCode" column="intdeco_code" jdbcType="VARCHAR"/>
+        <result property="intdecoName" column="intdeco_name" jdbcType="VARCHAR"/>
+        <result property="indoStruCode" column="indo_stru_code" jdbcType="VARCHAR"/>
+        <result property="indoStruName" column="indo_stru_name" jdbcType="VARCHAR"/>
+        <result property="proprtCode" column="proprt_code" jdbcType="VARCHAR"/>
+        <result property="proprtName" column="proprt_name" jdbcType="VARCHAR"/>
+        <result property="location" column="location" jdbcType="VARCHAR"/>
+        <result property="haCode" column="ha_code" jdbcType="VARCHAR"/>
+        <result property="haName" column="ha_name" jdbcType="VARCHAR"/>
+        <result property="gpsLon" column="gps_lon" jdbcType="FLOAT"/>
+        <result property="gpsLat" column="gps_lat" jdbcType="FLOAT"/>
+        <result property="gpsType" column="gps_type" jdbcType="VARCHAR"/>
+        <result property="unitPrice" column="unit_price" jdbcType="FLOAT"/>
+        <result property="totalPrice" column="total_price" jdbcType="FLOAT"/>
+        <result property="evalDate" column="eval_date" jdbcType="TIMESTAMP"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+        <result property="createName" column="create_name" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+        <result property="updateName" column="update_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="StatisticsResultMap" type="cn.com.school.classinfo.dto.BatchItemStatistics">
+        <result property="evalState" column="eval_state" jdbcType="VARCHAR"/>
+        <result property="count" column="state_count" jdbcType="VARCHAR"/>
+        <result property="totalAmount" column="total_amount" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      id,tenant_id,company_id, organization_id,batch_id, eval_state,city_code,city_name,dist_code,dist_name,
+      build_no,unit,room_no,prop_type,
+      bldg_area,br,lr,cr,ba,floor,bheight,face_code,face_name,bldg_type_code,bldg_type_name,build_year,
+      intdeco_code,intdeco_name,indo_stru_code,indo_stru_name,proprt_code,proprt_name,location,ha_code,ha_name,gps_lon,
+      gps_lat,gps_type,unit_price,total_price,eval_date,
+      create_time,create_by,create_name,update_time,update_by,update_name
+    </sql>
+
+    <sql id="Part_Column_List">
+      id,tenant_id,company_id, organization_id,batch_id, eval_state,city_code,city_name,dist_code,dist_name,
+      build_no,unit,room_no,prop_type,
+      bldg_area,br,lr,cr,ba,floor,bheight,face_code,face_name,bldg_type_code,bldg_type_name,build_year,
+      intdeco_code,intdeco_name,indo_stru_code,indo_stru_name,proprt_code,proprt_name,location,ha_code,ha_name,gps_lon,
+      gps_lat,gps_type,unit_price,total_price,eval_date
+    </sql>
+
+    <insert id="batchInsert" parameterType="cn.com.school.classinfo.model.EvaluationBatchItem" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into evaluation_batch_item(
+        tenant_id,company_id, organization_id, batch_id, eval_state, city_code, city_name, dist_code, dist_name, build_no, unit,
+        room_no, prop_type, bldg_area, br, lr, cr, ba, floor, bheight,
+        face_code, face_name, bldg_type_code, bldg_type_name, build_year, intdeco_code,
+        intdeco_name, indo_stru_code, indo_stru_name, proprt_code, proprt_name, location,
+        ha_code, ha_name, gps_lon, gps_lat, gps_type, unit_price, total_price,
+        create_time, create_by, create_name, update_time, update_by, update_name)
+        values
+        <foreach collection='list' item='item' separator=','>
+            (
+            #{item.tenantId},#{item.companyId},#{item.organizationId}, #{item.batchId}, #{item.evalState}, #{item.cityCode},
+            #{item.cityName},
+            #{item.distCode}, #{item.distName}, #{item.buildNo}, #{item.unit}, #{item.roomNo},
+            #{item.propType}, #{item.bldgArea}, #{item.br}, #{item.lr}, #{item.cr},
+            #{item.ba}, #{item.floor}, #{item.bheight}, #{item.faceCode}, #{item.faceName},
+            #{item.bldgTypeCode}, #{item.bldgTypeName}, #{item.buildYear}, #{item.intdecoCode}, #{item.intdecoName},
+            #{item.indoStruCode}, #{item.indoStruName}, #{item.proprtCode}, #{item.proprtName}, #{item.location},
+            #{item.haCode}, #{item.haName}, #{item.gpsLon}, #{item.gpsLat},
+            #{item.gpsType}, #{item.unitPrice}, #{item.totalPrice}, now(), #{item.createBy}, #{item.createName},
+            now(), #{item.updateBy}, #{item.updateName}
+            )
+        </foreach>
+    </insert>
+
+    <update id="batchUpdate" parameterType="cn.com.school.classinfo.model.EvaluationBatchItem">
+        <foreach collection='list' item='item' separator=';'>
+            update evaluation_batch_item set
+            eval_state = #{item.evalState},
+            city_code = #{item.cityCode},
+            city_name = #{item.cityName},
+            dist_code = #{item.distCode},
+            dist_name = #{item.distName},
+            ha_code = #{item.haCode},
+            gps_lon = #{item.gpsLon},
+            gps_lat = #{item.gpsLat},
+            unit_price = #{item.unitPrice},
+            total_price = #{item.totalPrice},
+            eval_date = #{item.evalDate},
+            update_time = now(),
+            update_by = #{item.updateBy},
+            update_name = #{item.updateName}
+            where id = #{item.id}
+        </foreach>
+    </update>
+
+    <select id="selectListByQuery" resultMap="BaseResultMap" parameterType="cn.com.school.classinfo.common.query.BatchItemQuery">
+        select
+          <include refid="Base_Column_List"/>
+        from evaluation_batch_item
+        where batch_id = #{batchId}
+        <if test='loginUser != null'>
+            and update_by = #{loginUser}
+        </if>
+        <if test='companyId != null'>
+            and company_id = #{companyId}
+        </if>
+        <if test='evalState != null'>
+            and eval_state = #{evalState}
+        </if>
+    </select>
+    
+    <select id="selectStatisticsByBatchId" resultMap="StatisticsResultMap" parameterType="java.lang.Integer">
+        select 
+           eval_state,
+           count(eval_state) state_count, 
+           sum(total_price) total_amount 
+        from evaluation_batch_item 
+        where batch_id = #{batchId} 
+        group by eval_state
+    </select>
+
+</mapper>

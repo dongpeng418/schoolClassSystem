@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.school.classinfo.mapper.SysPermissionMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.school.classinfo.model.SysPermission" >
+    <id property="id" column="id" jdbcType="INTEGER" />
+    <result property="resourceId" column="resource_id" jdbcType="INTEGER" />
+    <result property="name" column="name" jdbcType="VARCHAR" />
+    <result property="status" column="status" jdbcType="INTEGER" />
+    <result property="remark" column="remark" jdbcType="VARCHAR" />
+    <result property="createdTime" column="created_time" jdbcType="TIMESTAMP" />
+    <result property="createdBy" column="created_by" jdbcType="VARCHAR" />
+    <result property="createdIp" column="created_ip" jdbcType="VARCHAR" />
+    <result property="updatedBy" column="updated_by" jdbcType="VARCHAR" />
+    <result property="updatedTime" column="updated_time" jdbcType="TIMESTAMP" />
+    <result property="updatedIp" column="updated_ip" jdbcType="VARCHAR" />
+    
+    <!-- 不做维护，organization_id和 tenant_id
+    <result property="organizationId" column="organization_id" jdbcType="INTEGER" />
+    <result property="tenantId" column="tenant_id" jdbcType="INTEGER" /> -->
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,resource_id,operation_id,name,status,remark,created_time,created_by,created_ip,updated_by,updated_time,updated_ip
+  </sql>
+  
+  <select id="selectPermissionsByRoleId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+     spion.id id,resource_id,operation_id,name,status,remark  
+    from sys_permission as spion
+	inner join sys_role_permission as srp  on srp.permission_id = spion.id
+	and srp.role_id = #{roleId,jdbcType=INTEGER}  and spion.status = 0
+  </select>
+</mapper>

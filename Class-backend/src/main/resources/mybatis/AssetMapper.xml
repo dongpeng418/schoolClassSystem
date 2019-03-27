@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.school.classinfo.mapper.AssetMapper">
+    <resultMap id="BaseResultMap" type="cn.com.school.classinfo.model.Asset">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result property="tenantId" column="tenant_id" jdbcType="INTEGER"/>
+        <result property="organizationId" column="organization_id" jdbcType="INTEGER"/>
+        <result property="evalId" column="eval_id" jdbcType="INTEGER"/>
+        <result property="assetType" column="asset_type" jdbcType="INTEGER"/>
+        <result property="del" column="del" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+        <result property="createName" column="create_name" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+        <result property="updateName" column="update_name" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="VOResultMap" type="cn.com.school.classinfo.vo.AssetVO">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result property="evalId" column="eval_id" jdbcType="INTEGER"/>
+        <result property="assetType" column="asset_type" jdbcType="VARCHAR"/>
+        <result property="evalType" column="eval_type" jdbcType="INTEGER"/>
+        <result property="evalCode" column="eval_code" jdbcType="VARCHAR"/>
+        <result property="cityCode" column="city_code" jdbcType="VARCHAR"/>
+        <result property="cityName" column="city_name" jdbcType="VARCHAR"/>
+        <result property="distCode" column="dist_code" jdbcType="VARCHAR"/>
+        <result property="distName" column="dist_name" jdbcType="VARCHAR"/>
+        <result property="buildNo" column="build_no" jdbcType="VARCHAR"/>
+        <result property="unit" column="unit" jdbcType="TIMESTAMP"/>
+        <result property="roomNo" column="room_no" jdbcType="TIMESTAMP"/>
+        <result property="propType" column="prop_type" jdbcType="TIMESTAMP"/>
+        <result property="bldgArea" column="bldg_area" jdbcType="FLOAT"/>
+        <result property="br" column="br" jdbcType="INTEGER"/>
+        <result property="lr" column="lr" jdbcType="INTEGER"/>
+        <result property="cr" column="cr" jdbcType="INTEGER"/>
+        <result property="ba" column="ba" jdbcType="INTEGER"/>
+        <result property="floor" column="floor" jdbcType="INTEGER"/>
+        <result property="bheight" column="bheight" jdbcType="TIMESTAMP"/>
+        <result property="faceCode" column="face_code" jdbcType="VARCHAR"/>
+        <result property="faceName" column="face_name" jdbcType="VARCHAR"/>
+        <result property="bldgTypeCode" column="bldg_type_code" jdbcType="VARCHAR"/>
+        <result property="bldgTypeName" column="bldg_type_name" jdbcType="VARCHAR"/>
+        <result property="buildYear" column="build_year" jdbcType="VARCHAR"/>
+        <result property="intdecoCode" column="intdeco_code" jdbcType="VARCHAR"/>
+        <result property="intdecoName" column="intdeco_name" jdbcType="VARCHAR"/>
+        <result property="indoStruCode" column="indo_stru_code" jdbcType="VARCHAR"/>
+        <result property="indoStruName" column="indo_stru_name" jdbcType="VARCHAR"/>
+        <result property="proprtCode" column="proprt_code" jdbcType="VARCHAR"/>
+        <result property="proprtName" column="proprt_name" jdbcType="VARCHAR"/>
+        <result property="location" column="location" jdbcType="VARCHAR"/>
+        <result property="haCode" column="ha_code" jdbcType="VARCHAR"/>
+        <result property="haName" column="ha_name" jdbcType="VARCHAR"/>
+        <result property="gpsLon" column="gps_lon" jdbcType="FLOAT"/>
+        <result property="gpsLat" column="gps_lat" jdbcType="FLOAT"/>
+        <result property="gpsType" column="gps_type" jdbcType="VARCHAR"/>
+        <result property="unitPrice" column="unit_price" jdbcType="FLOAT"/>
+        <result property="totalPrice" column="total_price" jdbcType="FLOAT"/>
+        <result property="evalDate" column="eval_date" jdbcType="TIMESTAMP"/>
+        <result property="inquiry" column="inquiry" jdbcType="INTEGER"/>
+        <result property="advisory" column="advisory" jdbcType="INTEGER"/>
+        <result property="historyCount" column="history_count" jdbcType="INTEGER"/>
+        <result property="businessTypeId" column="business_type_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      id,tenant_id,organization_id,eval_id,asset_type,del,create_time,create_by,create_name,update_time,update_by,update_name
+    </sql>
+
+    <sql id="VO_Column_List">
+        id, eval_id, asset_type,eval_type, eval_code,city_code,city_name,dist_code,dist_name,build_no,unit,room_no,prop_type,
+        prop_type_name,bldg_area,br,lr,cr,ba,floor,bheight,face_code,face_name,bldg_type_code,bldg_type_name,build_year,
+        intdeco_code,intdeco_name,indo_stru_code,indo_stru_name,proprt_code,proprt_name,location,ha_code,ha_name,
+        gps_lon,gps_lat,gps_type,unit_price,total_price,eval_date,inquiry,advisory,history_count,business_type_id
+    </sql>
+
+    <insert id="insert" parameterType="cn.com.school.classinfo.model.Asset" useGeneratedKeys="true" keyProperty="id">
+        insert into asset(
+              tenant_id, company_id, organization_id, eval_id, asset_type, create_time, create_by, create_name,
+              update_time, update_by, update_name) 
+        values(
+              #{tenantId}, #{companyId}, #{organizationId}, #{evalId}, #{assetType}, now(), #{createBy},
+              #{createName}, now(), #{updateBy}, #{updateName}
+        )
+    </insert>
+    
+    <update id="update" parameterType="cn.com.school.classinfo.model.Asset">
+        update asset
+            <trim prefix='set' suffixOverrides=','>
+              <if test='assetType != null'>
+                     asset_type = #{assetType},
+                  </if>
+              <if test='del != null'>
+                     del = #{del},
+                  </if>
+              update_time = now(),
+              update_by = #{updateBy},
+              update_name = #{updateName},
+            </trim>
+        where id=#{id}
+    </update>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="cn.com.school.classinfo.common.query.AssetQuery">
+        select id, eval_id, asset_type from asset where id = #{id} and del=0
+    </select>
+    
+    <select id="selectByQuery" resultMap="VOResultMap" parameterType="cn.com.school.classinfo.common.query.AssetQuery">
+        select
+          ast.id, ast.eval_id, ast.asset_type, er.eval_type,
+          er.eval_code, er.city_code, er.city_name, er.dist_code, er.dist_name, er.build_no, er.unit,
+          er.room_no, er.prop_type, er.bldg_area, er.br, er.lr, er.cr, er.ba, er.floor, er.bheight,
+          er.face_code, er.face_name, er.bldg_type_code, er.bldg_type_name, er.build_year, er.intdeco_code,
+          er.intdeco_name, er.indo_stru_code, er.indo_stru_name, er.proprt_code, er.proprt_name, er.location,
+          er.ha_code, er.ha_name, er.gps_lon, er.gps_lat, er.gps_type,unit_price, er.total_price, er.eval_date,
+          er.inquiry, er.advisory, er.history_count, er.business_type_id
+         from evaluation_record as er
+           join asset as ast on er.id = ast.eval_id
+         where ast.del=0
+           <if test='city != null'>
+                 AND er.city_name LIKE CONCAT('%',#{city},'%')
+           </if>
+           <if test='ha != null'>
+                 AND er.ha_name LIKE CONCAT('%',#{ha},'%')
+           </if>
+           <if test='type != null'>
+                 AND ast.asset_type = #{type}
+           </if>
+           <if test='beginDate != null'>
+               <![CDATA[ AND DATE_FORMAT(er.eval_date, '%Y-%m-%d') >= DATE_FORMAT(#{beginDate}, '%Y-%m-%d')]]>
+           </if>
+           <if test='endDate != null'>
+               <![CDATA[ AND DATE_FORMAT(er.eval_date, '%Y-%m-%d') <= DATE_FORMAT(#{endDate}, '%Y-%m-%d')]]>
+           </if>
+           AND ast.company_id = #{companyId}
+           AND ast.update_by = #{loginUser}
+         order by er.eval_date desc
+    </select>
+
+</mapper>

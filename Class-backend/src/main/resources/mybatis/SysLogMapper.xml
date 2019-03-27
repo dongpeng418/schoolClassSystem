@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.school.classinfo.mapper.SysLogMapper">
+  <resultMap id="BaseResultMap" type="cn.com.school.classinfo.model.SysLog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="tenant_id" jdbcType="INTEGER" property="tenantId" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+    <result column="operate_by" jdbcType="VARCHAR" property="operateBy" />
+    <result column="operate_name" jdbcType="VARCHAR" property="operateName" />
+    <result column="operate_log" jdbcType="VARCHAR" property="operateLog" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, tenant_id, operate_time, operate_by, operate_name, operate_log
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectListByQuery" parameterType="cn.com.school.classinfo.common.query.SysLogQuery" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_log
+    where tenant_id = #{tenantId}
+    <if test='loginUser != null'>
+      AND operate_by like CONCAT('%',#{loginUser},'%')
+    </if>
+    <if test='userName != null'>
+      AND operate_name like CONCAT('%',#{userName},'%')
+    </if>
+    <if test='beginDate != null'>
+      <![CDATA[ AND DATE_FORMAT(operate_time, '%Y-%m-%d') >= DATE_FORMAT(#{beginDate}, '%Y-%m-%d')]]>
+    </if>
+    <if test='endDate != null'>
+      <![CDATA[ AND DATE_FORMAT(operate_time, '%Y-%m-%d') <= DATE_FORMAT(#{endDate}, '%Y-%m-%d')]]>
+    </if>
+     order by operate_time desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.school.classinfo.model.SysLog">
+    insert into sys_log (id, tenant_id, operate_time, 
+      operate_by, operate_name, operate_log
+      )
+    values (#{id,jdbcType=INTEGER}, #{tenantId,jdbcType=INTEGER}, #{operateTime,jdbcType=TIMESTAMP},
+      #{operateBy,jdbcType=VARCHAR}, #{operateName,jdbcType=VARCHAR}, #{operateLog,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.school.classinfo.model.SysLog">
+    insert into sys_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="operateTime != null">
+        operate_time,
+      </if>
+      <if test="operateBy != null">
+        operate_by,
+      </if>
+      <if test="operateName != null">
+        operate_name,
+      </if>
+      <if test="operateLog != null">
+        operate_log,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="operateTime != null">
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateBy != null">
+        #{operateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="operateName != null">
+        #{operateName,jdbcType=VARCHAR},
+      </if>
+      <if test="operateLog != null">
+        #{operateLog,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.school.classinfo.model.SysLog">
+    update sys_log
+    <set>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="operateTime != null">
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateBy != null">
+        operate_by = #{operateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="operateName != null">
+        operate_name = #{operateName,jdbcType=VARCHAR},
+      </if>
+      <if test="operateLog != null">
+        operate_log = #{operateLog,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.school.classinfo.model.SysLog">
+    update sys_log
+    set tenant_id = #{tenantId,jdbcType=INTEGER},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operate_by = #{operateBy,jdbcType=VARCHAR},
+      operate_name = #{operateName,jdbcType=VARCHAR},
+      operate_log = #{operateLog,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

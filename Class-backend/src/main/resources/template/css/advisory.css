@@ -1,0 +1,312 @@
+* {
+    -webkit-tap-highlight-color: rgba(255,0,0,0);
+    -webkit-margin-before: 0px;
+    -webkit-margin-after: 0px;
+    -webkit-padding-start: 0px;
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    list-style: none;
+    -webkit-font-smoothing: antialiased;
+    -webkit-touch-callout: none;
+    font-family: PingFangSC-Regular;
+
+}
+.advisoryReport {
+    padding: 0 10px 50px 10px;
+    width: 830px;
+    margin: 20px auto;
+}
+.advisoryReport .main_body {
+    border: 1px solid #dadee3;
+    font-size: 14px;
+}
+.advisoryReport .main_body .header {
+    margin: 30px auto 0;
+    width: 400px;
+    text-align: center;
+}
+.advisoryReport .main_body .header .title {
+    font-size: 1.7rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.advisoryReport .main_body .header .report_num {
+    position: relative;
+    width: 100%;
+    background: #fff;
+    margin: 20px 0 -10px 0;
+}
+.advisoryReport .main_body .body {
+    width: 100%;
+    border-top: 1px solid #dadee3;
+    padding: 0 30px;
+}
+.advisoryReport .main_body .body .info {
+    margin-top: 20px;
+    height: 95px;
+    background: #ff6704;
+    color: #fff;
+}
+.advisoryReport .main_body .body .item {
+    width: 33%;
+    float: left;
+    padding: 20px 0 20px 40px;
+    height: 100%;
+    background: #ff6704;
+}
+.advisoryReport .main_body .body .item .item_price span {
+    font-size: 2rem;
+}
+.advisoryReport .main_body .body .item:nth-child(3) .item_price {
+    margin-top: 5px;
+}
+.advisoryReport .main_body .body .base_info {
+    padding: 0 10px;
+}
+.advisoryReport .main_body .body .div_title {
+    font-weight: 600;
+    margin: 15px 0;
+}
+.advisoryReport .main_body .body .base_info .base_body {
+    position: relative;
+    font-size: 12px;
+}
+.advisoryReport .main_body .body .base_info .base_body .table_box {
+    width: 405px;
+    display: inline-block;
+    margin-right: 2px;
+}
+.advisoryReport .main_body .body .base_info .base_body .table_box table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.advisoryReport .main_body .body .base_info .base_body .table_box table tr {
+    height: 30px;
+}
+.advisoryReport .main_body .body .base_info .base_body .table_box table td {
+    border: 1px solid #dadee3;
+    width: 50%;
+    word-break: break-all;
+}
+.advisoryReport .main_body .body .base_info .base_body .table_box table td span {
+    width: 125px;
+    text-align: right;
+    display: inline-block;
+}
+.advisoryReport .main_body .body .base_info .base_body .valuation {
+    display: inline-block;
+    position: absolute;
+    height: 100%;
+}
+.advisoryReport .main_body .body .base_info .base_body .valuation .method {
+    width: 100%;
+    border-top: 1px solid #dadee3;
+    bottom: 0;
+    position: absolute;
+    height: 60px;
+    text-align: center;
+}
+.advisoryReport .main_body .body .base_info .base_body .valuation .method font {
+    font-size: 16px;
+    font-weight: 600;
+    width: 90px;
+    display: inline-block;
+    position: relative;
+    top: -11px;
+    background: #fff;
+}
+.advisoryReport .main_body .body .base_info .base_body .valuation .method {
+    width: 100%;
+    border-top: 1px solid #dadee3;
+    bottom: 0;
+    position: absolute;
+    height: 60px;
+    text-align: center;
+}
+.advisoryReport .main_body .body .base_info .base_body {
+    position: relative;
+    font-size: 12px;
+}
+.advisoryReport .main_body .body .base_info .base_body .valuation .method .button {
+    position: absolute;
+    bottom: 3px;
+    left:10px;
+}
+.advisoryReport .main_body .body .base_info .base_body .valuation .method .button .btn {
+    cursor: default;
+    height: 40px;
+    background: #ff6704 !important;
+    font-size: 15px;
+    padding: 0 16px;
+    line-height: 40px;
+}
+.btn {
+    font-family: PingFangSC-Regular;
+    display: inline-block;
+    min-width: 70px;
+    height: 34px;
+    line-height: 34px;
+    margin-top: -5px;
+    padding: 0 10px;
+    border-radius: 4px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    vertical-align: middle;
+}
+.advisoryReport .main_body .body .trend {
+    padding-left: 10px;
+}
+.advisoryReport .main_body .body .div_title {
+    font-weight: 600;
+    margin: 15px 0;
+}
+.advisoryReport .main_body .body .trend #market-trend {
+    height: 270px;
+    width: 98%;
+    border: 1px solid #dadee3;
+    padding: 10px 5px;
+}
+.advisoryReport .main_body .body .cert {
+    padding: 0 10px;
+}
+.advisoryReport .main_body .body .div_title {
+    font-weight: 600;
+    margin: 15px 0;
+}
+.advisoryReport .main_body .body .cert .img {
+    height: 225px;
+    margin-bottom: 10px;
+}
+.advisoryReport .main_body .body .cert .img .rcLF {
+    width: 164px;
+    margin-right: 70px;
+}
+.advisoryReport .main_body .body .cert .img div {
+    height: 225px;
+    float: left;
+    display: inline-block;
+}
+.advisoryReport .main_body .body .cert .img div img {
+    height: 100%;
+    width: 100%;
+}
+.advisoryReport .main_body .body .cert .img div:nth-child(2) {
+    text-align: center;
+}
+.advisoryReport .main_body .body .cert .img .rcZZ {
+    width: 170px;
+    margin-right: 70px;
+}
+.advisoryReport .main_body .body .cert .img div {
+    height: 225px;
+    float: left;
+    display: inline-block;
+}
+.advisoryReport .main_body .body .cert .img .rcZZ .rcTop {
+    width: 170px;
+    height: 112px;
+}
+.advisoryReport .main_body .body .cert .img div {
+    height: 225px;
+    float: left;
+    display: inline-block;
+}
+.advisoryReport .main_body .body .cert .img div img {
+    height: 100%;
+    width: 100%;
+}
+.advisoryReport .main_body .body .cert .img .rcZZ .rcBot {
+    height: 112px;
+    /* position: absolute; */
+}
+.advisoryReport .main_body .body .cert .img div:last-child {
+    text-align: right;
+}
+.advisoryReport .main_body .body .cert .img div:nth-child(2) {
+    text-align: center;
+}
+.advisoryReport .main_body .body .cert .img div {
+    height: 225px;
+    float: left;
+    display: inline-block;
+}
+.advisoryReport .main_body .body .cert .img .rcZZ .rcBot div {
+    display: inline-block;
+    height: 112px;
+    width: 72px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.advisoryReport .main_body .body .cert .img div {
+    height: 225px;
+    float: left;
+    display: inline-block;
+}
+.advisoryReport .main_body .body .cert .img div img {
+    height: 100%;
+    width: 100%;
+}
+.advisoryReport .main_body .body .cert .img .rcZZ .rcBot div {
+    display: inline-block;
+    height: 112px;
+    width: 72px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.advisoryReport .main_body .body .cert .img div:last-child {
+    text-align: right;
+}
+.advisoryReport .main_body .body .cert .img div:nth-child(2) {
+    text-align: center;
+}
+.advisoryReport .main_body .body .cert .img div {
+    height: 225px;
+    float: left;
+    display: inline-block;
+}
+.advisoryReport .main_body .body .cert .img div img {
+    height: 100%;
+    width: 100%;
+}
+.advisoryReport .main_body .body .cert .img div:last-child {
+    text-align: right;
+}
+.advisoryReport .main_body .body .cert .img .rcYZ {
+    width: 218px;
+    position: relative;
+}
+.advisoryReport .main_body .body .cert .img div {
+    height: 225px;
+    float: left;
+    display: inline-block;
+}
+.advisoryReport .main_body .body .cert .img div img {
+    height: 100%;
+    width: 100%;
+}
+.advisoryReport .main_body .body .cert .img .rcYZ .reportSign {
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -20px;
+    text-align: center;
+    line-height: 28px;
+    font-size: 14px;
+    font-weight: 600;
+}
+.advisoryReport .main_body .body .cert .img div:last-child {
+    text-align: right;
+}
+.advisoryReport .main_body .body .cert .img div:nth-child(2) {
+    text-align: center;
+}
+.advisoryReport .main_body .body .cert .img div {
+    height: 225px;
+    float: left;
+    display: inline-block;
+}

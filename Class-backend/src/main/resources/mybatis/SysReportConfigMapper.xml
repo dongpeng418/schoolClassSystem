@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.school.classinfo.mapper.SysReportConfigMapper">
+  <resultMap id="BaseResultMap" type="cn.com.school.classinfo.model.SysReportConfig">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="tenant_id" jdbcType="INTEGER" property="tenantId" />
+    <result column="report_name" jdbcType="VARCHAR" property="reportName" />
+    <result column="report_type" jdbcType="INTEGER" property="reportType" />
+    <result column="report_statement" jdbcType="VARCHAR" property="reportStatement" />
+    <result column="report_sign" jdbcType="VARCHAR" property="reportSign" />
+    <result column="business_license" jdbcType="VARCHAR" property="businessLicense" />
+    <result column="certificate" jdbcType="VARCHAR" property="certificate" />
+    <result column="appraiser_sign1" jdbcType="VARCHAR" property="appraiserSign1" />
+    <result column="appraiser_sign2" jdbcType="VARCHAR" property="appraiserSign2" />
+    <result column="report_sign_img" jdbcType="VARCHAR" property="reportSignImg" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_name" jdbcType="VARCHAR" property="createName" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_name" jdbcType="VARCHAR" property="updateName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, tenant_id, report_name, report_type, report_statement, report_sign, business_license, 
+    certificate, appraiser_sign1, appraiser_sign2, report_sign_img, create_time, create_by, 
+    create_name, update_time, update_by, update_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_report_config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByReportType" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_report_config
+    where report_type = #{reportType}
+    and tenant_id = #{tenantId}
+    and is_new = 1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_report_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.school.classinfo.model.SysReportConfig">
+    insert into sys_report_config (id, tenant_id, report_name, 
+      report_type, report_statement, report_sign, 
+      business_license, certificate, appraiser_sign1, 
+      appraiser_sign2, report_sign_img, create_time,
+      create_by, create_name, update_time, 
+      update_by, update_name)
+    values (#{id,jdbcType=INTEGER}, #{tenantId,jdbcType=INTEGER}, #{reportName,jdbcType=VARCHAR}, 
+      #{reportType,jdbcType=INTEGER}, #{reportStatement,jdbcType=VARCHAR}, #{reportSign,jdbcType=VARCHAR}, 
+      #{businessLicense,jdbcType=VARCHAR}, #{certificate,jdbcType=VARCHAR}, #{appraiserSign1,jdbcType=VARCHAR}, 
+      #{appraiserSign2,jdbcType=VARCHAR}, #{reportSignImg,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{createBy,jdbcType=VARCHAR}, #{createName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+      #{updateBy,jdbcType=VARCHAR}, #{updateName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.school.classinfo.model.SysReportConfig">
+    insert into sys_report_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="reportName != null">
+        report_name,
+      </if>
+      <if test="reportType != null">
+        report_type,
+      </if>
+      <if test="reportStatement != null">
+        report_statement,
+      </if>
+      <if test="reportSign != null">
+        report_sign,
+      </if>
+      <if test="businessLicense != null">
+        business_license,
+      </if>
+      <if test="certificate != null">
+        certificate,
+      </if>
+      <if test="appraiserSign1 != null">
+        appraiser_sign1,
+      </if>
+      <if test="appraiserSign2 != null">
+        appraiser_sign2,
+      </if>
+      <if test="reportSignImg != null">
+        report_sign_img,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createName != null">
+        create_name,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateName != null">
+        update_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="reportName != null">
+        #{reportName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportType != null">
+        #{reportType,jdbcType=INTEGER},
+      </if>
+      <if test="reportStatement != null">
+        #{reportStatement,jdbcType=VARCHAR},
+      </if>
+      <if test="reportSign != null">
+        #{reportSign,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicense != null">
+        #{businessLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="certificate != null">
+        #{certificate,jdbcType=VARCHAR},
+      </if>
+      <if test="appraiserSign1 != null">
+        #{appraiserSign1,jdbcType=VARCHAR},
+      </if>
+      <if test="appraiserSign2 != null">
+        #{appraiserSign2,jdbcType=VARCHAR},
+      </if>
+      <if test="reportSignImg != null">
+        #{reportSignImg,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createName != null">
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateName != null">
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.school.classinfo.model.SysReportConfig">
+    update sys_report_config
+    <set>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="reportName != null">
+        report_name = #{reportName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportType != null">
+        report_type = #{reportType,jdbcType=INTEGER},
+      </if>
+      <if test="reportStatement != null">
+        report_statement = #{reportStatement,jdbcType=VARCHAR},
+      </if>
+      <if test="reportSign != null">
+        report_sign = #{reportSign,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicense != null">
+        business_license = #{businessLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="certificate != null">
+        certificate = #{certificate,jdbcType=VARCHAR},
+      </if>
+      <if test="appraiserSign1 != null">
+        appraiser_sign1 = #{appraiserSign1,jdbcType=VARCHAR},
+      </if>
+      <if test="appraiserSign2 != null">
+        appraiser_sign2 = #{appraiserSign2,jdbcType=VARCHAR},
+      </if>
+      <if test="reportSignImg != null">
+        report_sign_img = #{reportSignImg,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createName != null">
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateName != null">
+        update_name = #{updateName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.school.classinfo.model.SysReportConfig">
+    update sys_report_config
+    set tenant_id = #{tenantId,jdbcType=INTEGER},
+      report_name = #{reportName,jdbcType=VARCHAR},
+      report_type = #{reportType,jdbcType=INTEGER},
+      report_statement = #{reportStatement,jdbcType=VARCHAR},
+      report_sign = #{reportSign,jdbcType=VARCHAR},
+      business_license = #{businessLicense,jdbcType=VARCHAR},
+      certificate = #{certificate,jdbcType=VARCHAR},
+      appraiser_sign1 = #{appraiserSign1,jdbcType=VARCHAR},
+      appraiser_sign2 = #{appraiserSign2,jdbcType=VARCHAR},
+      report_sign_img = #{reportSignImg,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_name = #{createName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_name = #{updateName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updatePath" parameterType="cn.com.school.classinfo.model.SysReportConfig">
+    update sys_report_config
+    set
+      business_license = #{businessLicense,jdbcType=VARCHAR},
+      certificate = #{certificate,jdbcType=VARCHAR},
+      appraiser_sign1 = #{appraiserSign1,jdbcType=VARCHAR},
+      appraiser_sign2 = #{appraiserSign2,jdbcType=VARCHAR},
+      report_sign_img = #{reportSignImg,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_name = #{updateName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateIsNew" parameterType="cn.com.school.classinfo.model.SysReportConfig">
+    update sys_report_config
+    set
+      is_new = 0,
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_name = #{updateName,jdbcType=VARCHAR}
+    where tenant_id = #{tenantId}
+     and report_type = #{reportType}
+     and is_new = 1
+  </update>
+</mapper>

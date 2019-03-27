@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.school.classinfo.mapper.BusinessMangeMapper">
+    <resultMap id="BaseResultMap" type="cn.com.school.classinfo.model.SysBusinessManage">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result property="tenantId" column="tenant_id" jdbcType="INTEGER"/>
+        <result property="organizationId" column="organization_id" jdbcType="INTEGER"/>
+        <result property="businessName" column="business_name" jdbcType="VARCHAR"/>
+        <result property="businessRemark" column="business_remark" jdbcType="VARCHAR"/>
+        <result property="del" column="del" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+        <result property="createName" column="create_name" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+        <result property="updateName" column="update_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      id,tenant_id,company_id,organization_id,business_name,business_remark,del,create_time,create_by,create_name,update_time,update_by,update_name
+    </sql>
+
+    <insert id="insert" parameterType="cn.com.school.classinfo.model.SysBusinessManage" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_business_manage(
+            tenant_id, company_id, organization_id, business_name, business_remark, create_time, 
+            create_by, create_name, update_time, update_by, update_name) 
+        values(
+            #{tenantId}, #{companyId}, #{organizationId}, #{businessName}, #{businessRemark}, now(), #{createBy},
+            #{createName}, now(), #{updateBy}, #{updateName}
+        )
+    </insert>
+    
+    <update id="update" parameterType="cn.com.school.classinfo.model.SysBusinessManage">
+        update sys_business_manage 
+         set 
+            business_name = #{businessName},
+            business_remark = #{businessRemark},
+            update_time = now(),
+            update_by = #{updateBy},
+            update_name = #{updateName}
+         where id=#{id}
+    </update>
+    
+    <update id="delete" parameterType="cn.com.school.classinfo.model.SysBusinessManage">
+        update sys_business_manage 
+         set 
+            del = 1,
+            update_time = now(),
+            update_by = #{updateBy},
+            update_name = #{updateName}
+         where id=#{id}
+    </update>
+
+    <select id="selectByCompanyId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select 
+            <include refid="Base_Column_List"/>
+        from sys_business_manage
+        where del = 0
+        and company_id = #{companyId}
+    </select>
+
+    <select id="selectByName" resultMap="BaseResultMap" parameterType="cn.com.school.classinfo.model.SysBusinessManage">
+        SELECT
+          <include refid="Base_Column_List"/>
+        FROM sys_business_manage
+        WHERE del = 0
+          AND company_id = #{companyId}
+          AND business_name = #{businessName}
+    </select>
+
+    <select id="selectByIds" resultMap="BaseResultMap" parameterType="cn.com.school.classinfo.model.SysBusinessManage">
+        SELECT
+          <include refid="Base_Column_List"/>
+        FROM sys_business_manage
+        WHERE del = 0
+        and id in 
+        <foreach collection='ids' item='id' open='(' close=')' separator=','>
+           #{id}
+        </foreach>
+    </select>
+
+</mapper>

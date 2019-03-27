@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.school.classinfo.mapper.EvaluationBatchMapper">
+    <resultMap id="BaseResultMap" type="cn.com.school.classinfo.model.EvaluationBatch">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result property="tenantId" column="tenant_id" jdbcType="INTEGER"/>
+        <result property="companyId" column="company_id" jdbcType="INTEGER"/>
+        <result property="organizationId" column="organization_id" jdbcType="INTEGER"/>
+        <result property="taskCode" column="task_code" jdbcType="VARCHAR"/>
+        <result property="taskName" column="task_name" jdbcType="VARCHAR"/>
+        <result property="taskState" column="task_state" jdbcType="INTEGER"/>
+        <result property="filePath" column="file_path" jdbcType="VARCHAR"/>
+        <result property="originalFilename" column="original_filename" jdbcType="VARCHAR"/>
+        <result property="evalTotal" column="eval_total" jdbcType="INTEGER"/>
+        <result property="evalSuccess" column="eval_success" jdbcType="INTEGER"/>
+        <result property="evalFail" column="eval_fail" jdbcType="INTEGER"/>
+        <result property="evalError" column="eval_error" jdbcType="INTEGER"/>
+        <result property="evalAmount" column="eval_amount" jdbcType="FLOAT"/>
+        <result property="submitTime" column="submit_time" jdbcType="TIMESTAMP"/>
+        <result property="finishTime" column="finish_time" jdbcType="TIMESTAMP"/>
+        <result property="recvPhone" column="recv_phone" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+        <result property="createName" column="create_name" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+        <result property="updateName" column="update_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      id,tenant_id,company_id, organization_id,task_code,task_name,task_state,file_path,original_filename,eval_total,
+      eval_success,eval_fail,eval_error,eval_amount,submit_time,finish_time,recv_phone,create_time,create_by,
+      create_name,update_time,update_by,update_name
+    </sql>
+
+    <sql id="Part_Column_List">
+      id,tenant_id,company_id, organization_id,task_code,task_name,task_state,file_path,original_filename,eval_total,
+      eval_success,eval_fail,eval_error,eval_amount,submit_time,finish_time,recv_phone
+    </sql>
+
+    <insert id="insert" parameterType="cn.com.school.classinfo.model.EvaluationBatch" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into evaluation_batch(
+          tenant_id, company_id, organization_id, task_code, task_name, task_state, file_path, original_filename, eval_total,
+          eval_success, eval_fail, eval_error, eval_amount, submit_time, finish_time, recv_phone,
+          create_time, create_by, create_name, update_time, update_by, update_name)
+        values(
+          #{tenantId}, #{companyId}, #{organizationId},#{taskCode}, #{taskName}, #{taskState}, #{filePath}, #{originalFilename},
+          #{evalTotal}, #{evalSuccess}, #{evalFail}, #{evalError}, #{evalAmount}, #{submitTime},
+          #{finishTime}, #{recvPhone}, now(), #{createBy}, #{createName}, now(), #{updateBy}, #{updateName}
+        )
+    </insert>
+
+    <update id="update" parameterType="cn.com.school.classinfo.model.EvaluationBatch">
+        update evaluation_batch
+        set
+          task_state = #{taskState},
+          finish_time = #{finishTime},
+          eval_success = #{evalSuccess},
+          eval_fail = #{evalFail},
+          eval_error = #{evalError},
+          eval_amount = #{evalAmount},
+          update_time = now()
+        where id = #{id}
+    </update>
+
+    <select id="selectByQuery" resultMap="BaseResultMap" parameterType="cn.com.school.classinfo.common.query.BatchQuery">
+        select
+          <include refid="Part_Column_List"/>
+        from evaluation_batch
+        where
+        <if test='id != null'>
+            id = #{id}
+            and update_by = #{loginUser}
+        </if>
+        <if test='taskCode != null'>
+            task_code = #{taskCode}
+        </if>
+    </select>
+
+    <select id="selectAllTaskCode" resultType="java.lang.String">
+        select
+          task_code
+        from evaluation_batch
+        where task_state = 1
+    </select>
+
+    <select id="selectListByQuery" resultMap="BaseResultMap" parameterType="cn.com.school.classinfo.common.query.BatchQuery">
+        select
+          <include refid="Part_Column_List"/>
+        from evaluation_batch
+        <where>
+            <if test='taskName != null'>
+                AND task_name LIKE CONCAT('%',#{taskName},'%')
+            </if>
+            <if test='taskState != null'>
+                AND task_state = #{taskState}
+            </if>
+            <if test='beginDate != null'>
+                <![CDATA[ AND DATE_FORMAT(submit_time, '%Y-%m-%d') >= DATE_FORMAT(#{beginDate}, '%Y-%m-%d')]]>
+            </if>
+            <if test='endDate != null'>
+                <![CDATA[ AND DATE_FORMAT(submit_time, '%Y-%m-%d') <= DATE_FORMAT(#{endDate}, '%Y-%m-%d')]]>
+            </if>
+            AND update_by = #{loginUser}
+            AND company_id = #{companyId}
+        </where>
+    </select>
+
+</mapper>

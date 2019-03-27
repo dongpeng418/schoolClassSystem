@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.school.classinfo.mapper.SysRoleMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.school.classinfo.model.SysRole" >
+    <id property="id" column="id" jdbcType="INTEGER" />
+    <result property="tenantId" column="tenant_id" jdbcType="INTEGER" />
+    <result property="code" column="code" jdbcType="VARCHAR" />
+    <result property="name" column="name" jdbcType="VARCHAR" />
+    <result property="status" column="status" jdbcType="INTEGER" />
+    <result property="organizationId" column="organization_id" jdbcType="INTEGER" />
+    <result property="customerCompanyId" column="customer_company_id" jdbcType="INTEGER" />
+    <result property="remark" column="remark" jdbcType="VARCHAR" />
+    <result property="createdTime" column="created_time" jdbcType="TIMESTAMP" />
+    <result property="createdBy" column="created_by" jdbcType="VARCHAR" />
+    <result property="createdName" column="created_name" jdbcType="VARCHAR" />
+    <result property="createdIp" column="created_ip" jdbcType="VARCHAR" />
+    <result property="updatedBy" column="updated_by" jdbcType="VARCHAR" />
+    <result property="updatedName" column="updated_name" jdbcType="VARCHAR" />
+    <result property="updatedTime" column="updated_time" jdbcType="TIMESTAMP" />
+    <result property="updatedIp" column="updated_ip" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="VoResultMap" type="cn.com.school.classinfo.vo.SysRoleVO" >
+    <id property="id" column="id" jdbcType="INTEGER" />
+    <result property="tenantId" column="tenant_id" jdbcType="INTEGER" />
+    <result property="code" column="code" jdbcType="VARCHAR" />
+    <result property="name" column="name" jdbcType="VARCHAR" />
+    <result property="status" column="status" jdbcType="INTEGER" />
+    <result property="organizationId" column="organization_id" jdbcType="INTEGER" />
+    <result property="customerCompanyId" column="customer_company_id" jdbcType="INTEGER" />
+    <result property="remark" column="remark" jdbcType="VARCHAR" />
+    <result property="createdTime" column="created_time" jdbcType="TIMESTAMP" />
+    <result property="createdBy" column="created_by" jdbcType="VARCHAR" />
+    <result property="createdName" column="created_name" jdbcType="VARCHAR" />
+    <result property="createdIp" column="created_ip" jdbcType="VARCHAR" />
+    <result property="updatedBy" column="updated_by" jdbcType="VARCHAR" />
+    <result property="updatedName" column="updated_name" jdbcType="VARCHAR" />
+    <result property="updatedTime" column="updated_time" jdbcType="TIMESTAMP" />
+    <result property="updatedIp" column="updated_ip" jdbcType="VARCHAR" />
+    <result property="userCount" column="user_count" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="SimpleVoResultMap" type="cn.com.school.classinfo.vo.SysRoleSimpleVO" >
+    <id property="id" column="id" jdbcType="INTEGER" />
+    <result property="name" column="name" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,tenant_id,organization_id,customer_company_id,code,name,status,remark,created_time,created_by,created_name,created_ip,updated_by, updated_name, updated_time, updated_ip
+  </sql>
+  <sql id="Simple_Column_List" >
+    id,name
+  </sql>
+  
+  <select id="selectBySelective" resultMap="BaseResultMap" parameterType="cn.com.school.classinfo.model.SysRole" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    <where>
+      <if test="id != null" >
+        and  id = #{id,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  
+  <select id="selectRoleInfoByName" resultMap="BaseResultMap" parameterType="cn.com.school.classinfo.model.SysRole" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    where status = 0
+    <if test="organizationId != null" >
+      and  organization_id = #{organizationId,jdbcType=INTEGER}
+    </if>
+    <if test="name != null" >
+      and  name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="roleType != null" >
+      and  role_type = #{roleType,jdbcType=VARCHAR}
+    </if>
+    <if test="customerCompanyId != null" >
+      and  customer_company_id = #{customerCompanyId,jdbcType=INTEGER}
+    </if>
+    <if test="tenantId != null" >
+      and  tenant_id = #{tenantId,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <select id="selectByQuery" resultMap="VoResultMap" parameterType="cn.com.school.classinfo.common.query.RoleQuery">
+    select
+     sr.id, sr.tenant_id, sr.organization_id, sr.code, sr.name, sr.status, sr.remark, sr.created_time,
+     sr.created_by, sr.created_name, sr.created_ip, sr.updated_by, sr.updated_name, sr.updated_time, sr.updated_ip,
+     uc.user_count
+    from sys_role sr left join (select role_id, count(user_id) user_count from sys_user_role group by role_id) uc
+    on sr.id = uc.role_id
+    <where>
+      sr.status = 0
+      <if test="code != null">
+        and sr.code = #{code}
+      </if>
+      <if test="roleType != null">
+        and sr.role_type = #{roleType,jdbcType=VARCHAR}
+      </if>
+       <if test="organizationId != null">
+        and sr.organization_id = #{organizationId,jdbcType=INTEGER}
+      </if>
+      <if test="tenantId != null">
+        and sr.tenant_id = #{tenantId}
+      </if>
+       <if test="customerCompanyId != null">
+        and sr.customer_company_id = #{customerCompanyId,jdbcType=INTEGER}
+      </if>
+      <if test="name != null">
+        and  sr.name like CONCAT('%',#{name},'%')
+      </if>
+      <if test="updateName != null">
+        and  (sr.updated_by like CONCAT('%',#{updateName},'%') || sr.updated_name like CONCAT('%',#{updateName},'%'))
+      </if>
+      <if test='beginDate != null'>
+        <![CDATA[ and DATE_FORMAT(sr.updated_time, '%Y-%m-%d') >= DATE_FORMAT(#{beginDate}, '%Y-%m-%d')]]>
+      </if>
+      <if test='endDate != null'>
+        <![CDATA[ and DATE_FORMAT(sr.updated_time, '%Y-%m-%d') <= DATE_FORMAT(#{endDate}, '%Y-%m-%d')]]>
+      </if>
+    </where>
+  </select>
+
+  <select id="selectAllByCondition" resultMap="SimpleVoResultMap" parameterType="cn.com.school.classinfo.common.query.RoleQuery">
+    select
+     <include refid="Simple_Column_List" />
+    from sys_role where status = 0
+     <if test="organizationId != null" >
+       and  organization_id = #{organizationId,jdbcType=INTEGER}
+     </if>
+     <if test="tenantId != null" >
+       and  tenant_id = #{tenantId,jdbcType=INTEGER}
+     </if>
+     <if test="roleType != null" >
+       and  role_type = #{roleType,jdbcType=VARCHAR}
+     </if>
+     <if test="customerCompanyId != null" >
+       and  customer_company_id = #{customerCompanyId,jdbcType=INTEGER}
+     </if>
+  </select>
+  
+  <select id="findRoleListByTenantId" resultMap="VoResultMap">
+   select
+     sr.id, sr.tenant_id, sr.organization_id, sr.code, sr.name, sr.status, sr.remark, sr.created_time,
+     sr.created_by, sr.created_name, sr.created_ip, sr.updated_by, sr.updated_name, sr.updated_time, sr.updated_ip,
+     uc.user_count
+    from sys_role sr left join (select role_id, count(user_id) user_count from sys_user_role group by role_id) uc
+    on sr.id = uc.role_id
+    <where>
+      sr.status = 0
+     <if test="tenantId != null" >
+       and  sr.tenant_id = #{tenantId,jdbcType=INTEGER}
+     </if>
+     <if test="roleType != null" >
+       and  sr.role_type = #{roleType,jdbcType=VARCHAR}
+     </if>
+     </where>
+  </select>
+  
+  <select id="findSimpleRoleListByTenantId" resultMap="SimpleVoResultMap">
+   select
+     <include refid="Simple_Column_List" />
+    from sys_role sr left join (select role_id, count(user_id) user_count from sys_user_role group by role_id) uc
+    on sr.id = uc.role_id
+    <where>
+      sr.status = 0
+     <if test="tenantId != null" >
+       and  sr.tenant_id = #{tenantId,jdbcType=INTEGER}
+     </if>
+     <if test="roleType != null" >
+       and  sr.role_type = #{roleType,jdbcType=VARCHAR}
+     </if>
+     </where>
+  </select>
+  
+  <select id="selectByUserId" resultMap="SimpleVoResultMap" parameterType="java.lang.Integer">
+    select sr.id, sr.name from sys_role sr
+    join sys_user_role sur on sr.id = sur.role_id
+    where status = 0 and sur.user_id = #{userId}
+  </select>
+
+    <insert id="insert" parameterType="cn.com.school.classinfo.model.SysRole"  useGeneratedKeys="true" keyProperty="id">
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="organizationId != null" >
+        organization_id,
+      </if>
+      <if test="customerCompanyId != null" >
+        customer_company_id,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="roleType != null" >
+        role_type,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="createdName != null" >
+        created_name,
+      </if>
+      <if test="createdIp != null" >
+        created_ip,
+      </if>
+      <if test="updatedBy != null" >
+        updated_by,
+      </if>
+      <if test="updatedName != null" >
+        updated_name,
+      </if>
+      <if test="updatedTime != null" >
+        updated_time,
+      </if>
+      <if test="updatedIp != null" >
+        updated_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="organizationId != null" >
+        #{organizationId,jdbcType=INTEGER},
+      </if>
+      <if test="customerCompanyId != null" >
+        #{customerCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null" >
+        #{roleType,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdName != null" >
+        #{createdName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdIp != null" >
+        #{createdIp,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedBy != null" >
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedName != null" >
+        #{updatedName,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null" >
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedIp != null" >
+        #{updatedIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+   <update id="update" parameterType="cn.com.school.classinfo.model.SysRole" >
+    update sys_role
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedBy != null" >
+        updated_by = #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedName != null" >
+        updated_name = #{updatedName,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null" >
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedIp != null" >
+        updated_ip = #{updatedIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from sys_role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+</mapper>
