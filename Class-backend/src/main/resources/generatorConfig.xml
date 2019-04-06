@@ -11,9 +11,9 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/crevaluedb"
-                        userId="crevalue"
-                        password="crevalue#">
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/school_class_db"
+                        userId="root"
+                        password="xt123">
         </jdbcConnection>
         <javaTypeResolver >
             <property name="forceBigDecimals" value="false" />
@@ -32,15 +32,104 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="sys_risk_business"
-               domainObjectName="SysRiskBusiness"
-               mapperName="SysRiskBusinessMapper"
+        <table tableName="sc_base_dictionary"
+               domainObjectName="ScBaseDictionary"
+               mapperName="ScBaseDictionaryMapper"
                enableSelectByExample="false"
                enableDeleteByExample="false"
                enableCountByExample="false"
                enableUpdateByExample="false"
                selectByExampleQueryId="false">
         </table>
-
+        
+          <table tableName="sc_class_info"
+               domainObjectName="ScClassInfo"
+               mapperName="ScClassInfoMapper"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        
+          <table tableName="sc_fixed_class_sln"
+               domainObjectName="ScFixedClassSln"
+               mapperName="ScFixedClassSlnMapper"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        
+        <table tableName="sc_move_class_sln"
+               domainObjectName="ScMoveClassSln"
+               mapperName="ScMoveClassSlnMapper"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        
+        <table tableName="sc_sln_info"
+               domainObjectName="ScSlnInfo"
+               mapperName="ScSlnInfoMapper"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        
+        <table tableName="sc_student_info"
+               domainObjectName="ScStudentInfo"
+               mapperName="ScStudentInfoMapper"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        
+        <table tableName="sc_student_select"
+               domainObjectName="ScStudentSelect"
+               mapperName="ScStudentSelectMapper"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        
+        <table tableName="sc_subject_list_plan"
+               domainObjectName="ScSubjectListPlan"
+               mapperName="ScSubjectListPlanMapper"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        
+        <table tableName="sc_teacher_info"
+               domainObjectName="ScTeacherInfo"
+               mapperName="ScTeacherInfoMapper"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        
+        <table tableName="sc_teacher_subject"
+               domainObjectName="ScTeacherSubject"
+               mapperName="ScTeacherSubjectMapper"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               selectByExampleQueryId="false">
+        </table>
     </context>
 </generatorConfiguration>

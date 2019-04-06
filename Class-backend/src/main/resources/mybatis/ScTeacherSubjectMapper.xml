@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.school.classinfo.mapper.ScTeacherSubjectMapper">
+  <resultMap id="BaseResultMap" type="cn.com.school.classinfo.model.ScTeacherSubject">
+    <id column="TS_ID" jdbcType="INTEGER" property="tsId" />
+    <result column="T_ID" jdbcType="INTEGER" property="tId" />
+    <result column="T_TYPE" jdbcType="INTEGER" property="tType" />
+    <result column="T_NAME" jdbcType="VARCHAR" property="tName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TS_ID, T_ID, T_TYPE, T_NAME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sc_teacher_subject
+    where TS_ID = #{tsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sc_teacher_subject
+    where TS_ID = #{tsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.school.classinfo.model.ScTeacherSubject">
+    insert into sc_teacher_subject (TS_ID, T_ID, T_TYPE, 
+      T_NAME)
+    values (#{tsId,jdbcType=INTEGER}, #{tId,jdbcType=INTEGER}, #{tType,jdbcType=INTEGER}, 
+      #{tName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.school.classinfo.model.ScTeacherSubject">
+    insert into sc_teacher_subject
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tsId != null">
+        TS_ID,
+      </if>
+      <if test="tId != null">
+        T_ID,
+      </if>
+      <if test="tType != null">
+        T_TYPE,
+      </if>
+      <if test="tName != null">
+        T_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tsId != null">
+        #{tsId,jdbcType=INTEGER},
+      </if>
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="tType != null">
+        #{tType,jdbcType=INTEGER},
+      </if>
+      <if test="tName != null">
+        #{tName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.school.classinfo.model.ScTeacherSubject">
+    update sc_teacher_subject
+    <set>
+      <if test="tId != null">
+        T_ID = #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="tType != null">
+        T_TYPE = #{tType,jdbcType=INTEGER},
+      </if>
+      <if test="tName != null">
+        T_NAME = #{tName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TS_ID = #{tsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.school.classinfo.model.ScTeacherSubject">
+    update sc_teacher_subject
+    set T_ID = #{tId,jdbcType=INTEGER},
+      T_TYPE = #{tType,jdbcType=INTEGER},
+      T_NAME = #{tName,jdbcType=VARCHAR}
+    where TS_ID = #{tsId,jdbcType=INTEGER}
+  </update>
+</mapper>

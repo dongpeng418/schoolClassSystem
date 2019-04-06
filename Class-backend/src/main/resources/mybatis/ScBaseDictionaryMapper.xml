@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.school.classinfo.mapper.ScBaseDictionaryMapper">
+  <resultMap id="BaseResultMap" type="cn.com.school.classinfo.model.ScBaseDictionary">
+    <id column="BD_ID" jdbcType="INTEGER" property="bdId" />
+    <result column="BD_NAME" jdbcType="VARCHAR" property="bdName" />
+    <result column="BD_TYPE" jdbcType="VARCHAR" property="bdType" />
+    <result column="BD_VALUE" jdbcType="VARCHAR" property="bdValue" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    BD_ID, BD_NAME, BD_TYPE, BD_VALUE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sc_base_dictionary
+    where BD_ID = #{bdId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sc_base_dictionary
+    where BD_ID = #{bdId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.school.classinfo.model.ScBaseDictionary">
+    insert into sc_base_dictionary (BD_ID, BD_NAME, BD_TYPE, 
+      BD_VALUE)
+    values (#{bdId,jdbcType=INTEGER}, #{bdName,jdbcType=VARCHAR}, #{bdType,jdbcType=VARCHAR}, 
+      #{bdValue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.school.classinfo.model.ScBaseDictionary">
+    insert into sc_base_dictionary
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bdId != null">
+        BD_ID,
+      </if>
+      <if test="bdName != null">
+        BD_NAME,
+      </if>
+      <if test="bdType != null">
+        BD_TYPE,
+      </if>
+      <if test="bdValue != null">
+        BD_VALUE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bdId != null">
+        #{bdId,jdbcType=INTEGER},
+      </if>
+      <if test="bdName != null">
+        #{bdName,jdbcType=VARCHAR},
+      </if>
+      <if test="bdType != null">
+        #{bdType,jdbcType=VARCHAR},
+      </if>
+      <if test="bdValue != null">
+        #{bdValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.school.classinfo.model.ScBaseDictionary">
+    update sc_base_dictionary
+    <set>
+      <if test="bdName != null">
+        BD_NAME = #{bdName,jdbcType=VARCHAR},
+      </if>
+      <if test="bdType != null">
+        BD_TYPE = #{bdType,jdbcType=VARCHAR},
+      </if>
+      <if test="bdValue != null">
+        BD_VALUE = #{bdValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BD_ID = #{bdId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.school.classinfo.model.ScBaseDictionary">
+    update sc_base_dictionary
+    set BD_NAME = #{bdName,jdbcType=VARCHAR},
+      BD_TYPE = #{bdType,jdbcType=VARCHAR},
+      BD_VALUE = #{bdValue,jdbcType=VARCHAR}
+    where BD_ID = #{bdId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.school.classinfo.mapper.ScSubjectListPlanMapper">
+  <resultMap id="BaseResultMap" type="cn.com.school.classinfo.model.ScSubjectListPlan">
+    <id column="PLS_ID" jdbcType="INTEGER" property="plsId" />
+    <result column="C_ID" jdbcType="INTEGER" property="cId" />
+    <result column="PLS_WEEK_NUM" jdbcType="INTEGER" property="plsWeekNum" />
+    <result column="PLS_NUM" jdbcType="INTEGER" property="plsNum" />
+    <result column="PLS_NAME" jdbcType="VARCHAR" property="plsName" />
+    <result column="T_ID" jdbcType="INTEGER" property="tId" />
+    <result column="PLS_TERM_NUM" jdbcType="INTEGER" property="plsTermNum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PLS_ID, C_ID, PLS_WEEK_NUM, PLS_NUM, PLS_NAME, T_ID, PLS_TERM_NUM
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sc_subject_list_plan
+    where PLS_ID = #{plsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sc_subject_list_plan
+    where PLS_ID = #{plsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.school.classinfo.model.ScSubjectListPlan">
+    insert into sc_subject_list_plan (PLS_ID, C_ID, PLS_WEEK_NUM, 
+      PLS_NUM, PLS_NAME, T_ID, 
+      PLS_TERM_NUM)
+    values (#{plsId,jdbcType=INTEGER}, #{cId,jdbcType=INTEGER}, #{plsWeekNum,jdbcType=INTEGER}, 
+      #{plsNum,jdbcType=INTEGER}, #{plsName,jdbcType=VARCHAR}, #{tId,jdbcType=INTEGER}, 
+      #{plsTermNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.school.classinfo.model.ScSubjectListPlan">
+    insert into sc_subject_list_plan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="plsId != null">
+        PLS_ID,
+      </if>
+      <if test="cId != null">
+        C_ID,
+      </if>
+      <if test="plsWeekNum != null">
+        PLS_WEEK_NUM,
+      </if>
+      <if test="plsNum != null">
+        PLS_NUM,
+      </if>
+      <if test="plsName != null">
+        PLS_NAME,
+      </if>
+      <if test="tId != null">
+        T_ID,
+      </if>
+      <if test="plsTermNum != null">
+        PLS_TERM_NUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="plsId != null">
+        #{plsId,jdbcType=INTEGER},
+      </if>
+      <if test="cId != null">
+        #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="plsWeekNum != null">
+        #{plsWeekNum,jdbcType=INTEGER},
+      </if>
+      <if test="plsNum != null">
+        #{plsNum,jdbcType=INTEGER},
+      </if>
+      <if test="plsName != null">
+        #{plsName,jdbcType=VARCHAR},
+      </if>
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="plsTermNum != null">
+        #{plsTermNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.school.classinfo.model.ScSubjectListPlan">
+    update sc_subject_list_plan
+    <set>
+      <if test="cId != null">
+        C_ID = #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="plsWeekNum != null">
+        PLS_WEEK_NUM = #{plsWeekNum,jdbcType=INTEGER},
+      </if>
+      <if test="plsNum != null">
+        PLS_NUM = #{plsNum,jdbcType=INTEGER},
+      </if>
+      <if test="plsName != null">
+        PLS_NAME = #{plsName,jdbcType=VARCHAR},
+      </if>
+      <if test="tId != null">
+        T_ID = #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="plsTermNum != null">
+        PLS_TERM_NUM = #{plsTermNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where PLS_ID = #{plsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.school.classinfo.model.ScSubjectListPlan">
+    update sc_subject_list_plan
+    set C_ID = #{cId,jdbcType=INTEGER},
+      PLS_WEEK_NUM = #{plsWeekNum,jdbcType=INTEGER},
+      PLS_NUM = #{plsNum,jdbcType=INTEGER},
+      PLS_NAME = #{plsName,jdbcType=VARCHAR},
+      T_ID = #{tId,jdbcType=INTEGER},
+      PLS_TERM_NUM = #{plsTermNum,jdbcType=INTEGER}
+    where PLS_ID = #{plsId,jdbcType=INTEGER}
+  </update>
+</mapper>

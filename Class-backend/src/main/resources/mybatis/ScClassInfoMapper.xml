@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.school.classinfo.mapper.ScClassInfoMapper">
+  <resultMap id="BaseResultMap" type="cn.com.school.classinfo.model.ScClassInfo">
+    <id column="C_ID" jdbcType="INTEGER" property="cId" />
+    <result column="C_CLASS_NAME" jdbcType="VARCHAR" property="cClassName" />
+    <result column="STU_ID" jdbcType="INTEGER" property="stuId" />
+    <result column="S_ID" jdbcType="INTEGER" property="sId" />
+    <result column="C_TYPE" jdbcType="INTEGER" property="cType" />
+    <result column="C_SLN_ID" jdbcType="INTEGER" property="cSlnId" />
+    <result column="C_CLASS_CODE" jdbcType="VARCHAR" property="cClassCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    C_ID, C_CLASS_NAME, STU_ID, S_ID, C_TYPE, C_SLN_ID, C_CLASS_CODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sc_class_info
+    where C_ID = #{cId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sc_class_info
+    where C_ID = #{cId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.school.classinfo.model.ScClassInfo">
+    insert into sc_class_info (C_ID, C_CLASS_NAME, STU_ID, 
+      S_ID, C_TYPE, C_SLN_ID, 
+      C_CLASS_CODE)
+    values (#{cId,jdbcType=INTEGER}, #{cClassName,jdbcType=VARCHAR}, #{stuId,jdbcType=INTEGER}, 
+      #{sId,jdbcType=INTEGER}, #{cType,jdbcType=INTEGER}, #{cSlnId,jdbcType=INTEGER}, 
+      #{cClassCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.school.classinfo.model.ScClassInfo">
+    insert into sc_class_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cId != null">
+        C_ID,
+      </if>
+      <if test="cClassName != null">
+        C_CLASS_NAME,
+      </if>
+      <if test="stuId != null">
+        STU_ID,
+      </if>
+      <if test="sId != null">
+        S_ID,
+      </if>
+      <if test="cType != null">
+        C_TYPE,
+      </if>
+      <if test="cSlnId != null">
+        C_SLN_ID,
+      </if>
+      <if test="cClassCode != null">
+        C_CLASS_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cId != null">
+        #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="cClassName != null">
+        #{cClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="stuId != null">
+        #{stuId,jdbcType=INTEGER},
+      </if>
+      <if test="sId != null">
+        #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="cType != null">
+        #{cType,jdbcType=INTEGER},
+      </if>
+      <if test="cSlnId != null">
+        #{cSlnId,jdbcType=INTEGER},
+      </if>
+      <if test="cClassCode != null">
+        #{cClassCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.school.classinfo.model.ScClassInfo">
+    update sc_class_info
+    <set>
+      <if test="cClassName != null">
+        C_CLASS_NAME = #{cClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="stuId != null">
+        STU_ID = #{stuId,jdbcType=INTEGER},
+      </if>
+      <if test="sId != null">
+        S_ID = #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="cType != null">
+        C_TYPE = #{cType,jdbcType=INTEGER},
+      </if>
+      <if test="cSlnId != null">
+        C_SLN_ID = #{cSlnId,jdbcType=INTEGER},
+      </if>
+      <if test="cClassCode != null">
+        C_CLASS_CODE = #{cClassCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where C_ID = #{cId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.school.classinfo.model.ScClassInfo">
+    update sc_class_info
+    set C_CLASS_NAME = #{cClassName,jdbcType=VARCHAR},
+      STU_ID = #{stuId,jdbcType=INTEGER},
+      S_ID = #{sId,jdbcType=INTEGER},
+      C_TYPE = #{cType,jdbcType=INTEGER},
+      C_SLN_ID = #{cSlnId,jdbcType=INTEGER},
+      C_CLASS_CODE = #{cClassCode,jdbcType=VARCHAR}
+    where C_ID = #{cId,jdbcType=INTEGER}
+  </update>
+</mapper>

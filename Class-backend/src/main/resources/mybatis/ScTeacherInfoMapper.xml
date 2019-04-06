@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.school.classinfo.mapper.ScTeacherInfoMapper">
+  <resultMap id="BaseResultMap" type="cn.com.school.classinfo.model.ScTeacherInfo">
+    <id column="T_ID" jdbcType="INTEGER" property="tId" />
+    <result column="T_NAME" jdbcType="VARCHAR" property="tName" />
+    <result column="T_SEX" jdbcType="VARCHAR" property="tSex" />
+    <result column="T_birthday" jdbcType="TIMESTAMP" property="tBirthday" />
+    <result column="T_TEACH_YEAR" jdbcType="INTEGER" property="tTeachYear" />
+    <result column="T_certification" jdbcType="VARCHAR" property="tCertification" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    T_ID, T_NAME, T_SEX, T_birthday, T_TEACH_YEAR, T_certification
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sc_teacher_info
+    where T_ID = #{tId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sc_teacher_info
+    where T_ID = #{tId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.school.classinfo.model.ScTeacherInfo">
+    insert into sc_teacher_info (T_ID, T_NAME, T_SEX, 
+      T_birthday, T_TEACH_YEAR, T_certification
+      )
+    values (#{tId,jdbcType=INTEGER}, #{tName,jdbcType=VARCHAR}, #{tSex,jdbcType=VARCHAR}, 
+      #{tBirthday,jdbcType=TIMESTAMP}, #{tTeachYear,jdbcType=INTEGER}, #{tCertification,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.school.classinfo.model.ScTeacherInfo">
+    insert into sc_teacher_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        T_ID,
+      </if>
+      <if test="tName != null">
+        T_NAME,
+      </if>
+      <if test="tSex != null">
+        T_SEX,
+      </if>
+      <if test="tBirthday != null">
+        T_birthday,
+      </if>
+      <if test="tTeachYear != null">
+        T_TEACH_YEAR,
+      </if>
+      <if test="tCertification != null">
+        T_certification,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="tName != null">
+        #{tName,jdbcType=VARCHAR},
+      </if>
+      <if test="tSex != null">
+        #{tSex,jdbcType=VARCHAR},
+      </if>
+      <if test="tBirthday != null">
+        #{tBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tTeachYear != null">
+        #{tTeachYear,jdbcType=INTEGER},
+      </if>
+      <if test="tCertification != null">
+        #{tCertification,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.school.classinfo.model.ScTeacherInfo">
+    update sc_teacher_info
+    <set>
+      <if test="tName != null">
+        T_NAME = #{tName,jdbcType=VARCHAR},
+      </if>
+      <if test="tSex != null">
+        T_SEX = #{tSex,jdbcType=VARCHAR},
+      </if>
+      <if test="tBirthday != null">
+        T_birthday = #{tBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tTeachYear != null">
+        T_TEACH_YEAR = #{tTeachYear,jdbcType=INTEGER},
+      </if>
+      <if test="tCertification != null">
+        T_certification = #{tCertification,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where T_ID = #{tId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.school.classinfo.model.ScTeacherInfo">
+    update sc_teacher_info
+    set T_NAME = #{tName,jdbcType=VARCHAR},
+      T_SEX = #{tSex,jdbcType=VARCHAR},
+      T_birthday = #{tBirthday,jdbcType=TIMESTAMP},
+      T_TEACH_YEAR = #{tTeachYear,jdbcType=INTEGER},
+      T_certification = #{tCertification,jdbcType=VARCHAR}
+    where T_ID = #{tId,jdbcType=INTEGER}
+  </update>
+</mapper>
