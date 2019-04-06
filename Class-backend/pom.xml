@@ -56,22 +56,10 @@
             <optional>true</optional>
         </dependency>
 
-        <!--redis -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-
         <!-- commons-pool2 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
-        </dependency>
-
-        <!--freemarker -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
 
         <!--mysql -->
@@ -203,12 +191,6 @@
             <artifactId>easypoi-annotation</artifactId>
         </dependency>
 
-        <!-- kafka -->
-        <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka-clients</artifactId>
-        </dependency>
-        
         <!-- shiro -->
 		<dependency>
 		    <groupId>org.apache.shiro</groupId>
@@ -221,12 +203,6 @@
 		    <version>3.3.0</version>
 		</dependency>
 		
-        <!-- https://mvnrepository.com/artifact/org.springframework.session/spring-session-data-redis -->
-		<dependency>
-		    <groupId>org.springframework.session</groupId>
-		    <artifactId>spring-session-data-redis</artifactId>
-		</dependency>
-
     </dependencies>
 
 </project>

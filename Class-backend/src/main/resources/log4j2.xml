@@ -65,31 +65,6 @@
                 </Delete>
             </DefaultRolloverStrategy>
         </RollingFile>
-        <!-- kafka异常时日志文件 -->
-        <RollingFile name="kafkaFile" fileName="${BASE_DIR}/kafka/kafka.log"
-                     filePattern="${BASE_DIR}/kafka/kafka-%d{yyyy-MM-dd}.log">
-            <PatternLayout pattern="${sys:FILE_LOG_PATTERN}"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy/>
-                <SizeBasedTriggeringPolicy size="20 MB"/>
-            </Policies>
-            <DefaultRolloverStrategy>
-                <Delete basePath="${BASE_DIR}/kafka">
-                    <IfLastModified age="7d"/>
-                </Delete>
-            </DefaultRolloverStrategy>
-        </RollingFile>
-        <!-- 发送日志到kafka -->
-        <Kafka name="kafka" topic="avs-log" ignoreExceptions="false">
-            <PatternLayout pattern="${sys:KAFKA_LOG_PATTERN}"/>
-            <Property name="bootstrap.servers">localhost:9092</Property>
-            <Property name="max.block.ms">2000</Property>
-        </Kafka>
-        <Failover name="failover" primary="kafka" retryIntervalSeconds="600">
-            <Failovers>
-                <AppenderRef ref="kafkaFile"/>
-            </Failovers>
-        </Failover>
     </Appenders>
     <Loggers>
         <Logger name="org.apache.kafka" level="error"/>
