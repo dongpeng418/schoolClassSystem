@@ -350,6 +350,9 @@ CREATE TABLE `sc_user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-   
+--2019年4月7日 10:15:30
+alter table SC_STUDENT_INFO add  column stu_birthday date;
+alter table SC_STUDENT_INFO drop  column stu_ ; 
+
 	  
 
