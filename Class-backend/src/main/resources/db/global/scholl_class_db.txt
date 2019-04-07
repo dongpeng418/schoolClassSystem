@@ -1,0 +1,334 @@
+/*==============================================================*/
+/* Table: SC_BASE_dictionary                                    */
+/*==============================================================*/
+create table SC_BASE_dictionary
+(
+   BD_ID                int not null,
+   BD_NAME              nvarchar(20),
+   BD_TYPE              nvarchar(20),
+   BD_VALUE             nvarchar(100),
+   primary key (BD_ID)
+);
+
+/*==============================================================*/
+/* Table: SC_CLASS_INFO                                         */
+/*==============================================================*/
+create table SC_CLASS_INFO
+(
+   C_ID                 int not null,
+   C_CLASS_NAME         nvarchar(20),
+   STU_ID               int,
+   S_ID                 INT,
+   C_TYPE               int,
+   C_SLN_ID             int,
+   C_CLASS_CODE         nvarchar(20),
+   primary key (C_ID)
+);
+
+/*==============================================================*/
+/* Table: SC_FIXED_CLASS_SLN                                    */
+/*==============================================================*/
+create table SC_FIXED_CLASS_SLN
+(
+   FCS_ID               int not null,
+   S_ID                 INT,
+   FCS_SUBJECT_NAME     nvarchar(50),
+   FCS_SUBJECT_CODE     nvarchar(10),
+   primary key (FCS_ID)
+);
+
+/*==============================================================*/
+/* Table: SC_MOVE_CLASS_SLN                                     */
+/*==============================================================*/
+create table SC_MOVE_CLASS_SLN
+(
+   MCS_ID               INT not null,
+   S_ID                 INT,
+   FCS_SUBJECT_NAME     nvarchar(50),
+   FCS_SUBJECT_CODE     nvarchar(10),
+   primary key (MCS_ID)
+);
+
+/*==============================================================*/
+/* Table: SC_SLN_INFO                                           */
+/*==============================================================*/
+create table SC_SLN_INFO
+(
+   S_ID                 INT not null,
+   S_NAME               NVARCHAR(50),
+   primary key (S_ID)
+);
+
+/*==============================================================*/
+/* Table: SC_STUDENT_INFO                                       */
+/*==============================================================*/
+create table SC_STUDENT_INFO
+(
+   STU_ID               int not null,
+   stu_no               nvarchar(20),
+   stu_name             nvarchar(16),
+   stu_sex              nvarchar(2),
+   stu_                 datetime,
+   stu_phone            nvarchar(20),
+   stu_PUB_ID           int,
+   primary key (STU_ID)
+);
+
+/*==============================================================*/
+/* Table: SC_STUDENT_SELECT                                     */
+/*==============================================================*/
+create table SC_STUDENT_SELECT
+(
+   ID                   int not null,
+   STU_ID               int,
+   S_ID                 int,
+   primary key (ID)
+);
+
+/*==============================================================*/
+/* Table: SC_SUBJECT_LIST_PLAN                                  */
+/*==============================================================*/
+create table SC_SUBJECT_LIST_PLAN
+(
+   PLS_ID               int not null,
+   C_ID                 int,
+   PLS_WEEK_NUM         int,
+   PLS_NUM              int,
+   PLS_NAME             nvarchar(50),
+   T_ID                 int,
+   PLS_TERM_NUM         INT,
+   primary key (PLS_ID)
+);
+
+/*==============================================================*/
+/* Table: SC_TEACHER_INFO                                       */
+/*==============================================================*/
+create table SC_TEACHER_INFO
+(
+   T_ID                 INT not null,
+   T_NAME               NVARCHAR(20),
+   T_SEX                nvarchar(2),
+   T_birthday           datetime,
+   T_TEACH_YEAR         int,
+   T_certification      nvarchar(50),
+   primary key (T_ID)
+);
+
+/*==============================================================*/
+/* Table: SC_TEACHER_SUBJECT                                    */
+/*==============================================================*/
+create table SC_TEACHER_SUBJECT
+(
+   TS_ID                int not null,
+   T_ID                 INT,
+   T_TYPE               int,
+   T_NAME               nvarchar(50),
+   primary key (TS_ID)
+);
+
+alter table SC_CLASS_INFO add constraint FK_Reference_5 foreign key (STU_ID)
+      references SC_STUDENT_INFO (STU_ID) on delete restrict on update restrict;
+
+alter table SC_CLASS_INFO add constraint FK_Reference_6 foreign key (S_ID)
+      references SC_SLN_INFO (S_ID) on delete restrict on update restrict;
+
+alter table SC_FIXED_CLASS_SLN add constraint FK_Reference_2 foreign key (S_ID)
+      references SC_SLN_INFO (S_ID) on delete restrict on update restrict;
+
+alter table SC_MOVE_CLASS_SLN add constraint FK_Reference_3 foreign key (S_ID)
+      references SC_SLN_INFO (S_ID) on delete restrict on update restrict;
+
+alter table SC_STUDENT_SELECT add constraint FK_Reference_1 foreign key (STU_ID)
+      references SC_STUDENT_INFO (STU_ID) on delete restrict on update restrict;
+
+alter table SC_TEACHER_SUBJECT add constraint FK_Reference_4 foreign key (T_ID)
+      references SC_TEACHER_INFO (T_ID) on delete restrict on update restrict;
+      
+/*==============================================================*/
+/* Table: SC_BASE_dictionary                                    */
+/*==============================================================*/
+create table SC_BASE_dictionary
+(
+   BD_ID                int not null,
+   BD_NAME              nvarchar(20),
+   BD_TYPE              nvarchar(20),
+   BD_VALUE             nvarchar(100),
+   primary key (BD_ID)
+);
+
+/*==============================================================*/
+/* Table: SC_CLASS_INFO                                         */
+/*==============================================================*/
+create table SC_CLASS_INFO
+(
+   C_ID                 int not null,
+   C_CLASS_NAME         nvarchar(20),
+   STU_ID               int,
+   S_ID                 INT,
+   C_TYPE               int,
+   C_SLN_ID             int,
+   C_CLASS_CODE         nvarchar(20),
+   primary key (C_ID)
+);
+
+/*==============================================================*/
+/* Table: SC_FIXED_CLASS_SLN                                    */
+/*==============================================================*/
+create table SC_FIXED_CLASS_SLN
+(
+   FCS_ID               int not null,
+   S_ID                 INT,
+   FCS_SUBJECT_NAME     nvarchar(50),
+   FCS_SUBJECT_CODE     nvarchar(10),
+   primary key (FCS_ID)
+);
+
+/*==============================================================*/
+/* Table: SC_MOVE_CLASS_SLN                                     */
+/*==============================================================*/
+create table SC_MOVE_CLASS_SLN
+(
+   MCS_ID               INT not null,
+   S_ID                 INT,
+   FCS_SUBJECT_NAME     nvarchar(50),
+   FCS_SUBJECT_CODE     nvarchar(10),
+   primary key (MCS_ID)
+);
+
+/*==============================================================*/
+/* Table: SC_SLN_INFO                                           */
+/*==============================================================*/
+create table SC_SLN_INFO
+(
+   S_ID                 INT not null,
+   S_NAME               NVARCHAR(50),
+   primary key (S_ID)
+);
+
+/*==============================================================*/
+/* Table: SC_STUDENT_INFO                                       */
+/*==============================================================*/
+create table SC_STUDENT_INFO
+(
+   STU_ID               int not null,
+   stu_no               nvarchar(20),
+   stu_name             nvarchar(16),
+   stu_sex              nvarchar(2),
+   stu_                 datetime,
+   stu_phone            nvarchar(20),
+   stu_PUB_ID           int,
+   primary key (STU_ID)
+);
+
+/*==============================================================*/
+/* Table: SC_STUDENT_SELECT                                     */
+/*==============================================================*/
+create table SC_STUDENT_SELECT
+(
+   ID                   int not null,
+   STU_ID               int,
+   S_ID                 int,
+   primary key (ID)
+);
+
+/*==============================================================*/
+/* Table: SC_SUBJECT_LIST_PLAN                                  */
+/*==============================================================*/
+create table SC_SUBJECT_LIST_PLAN
+(
+   PLS_ID               int not null,
+   C_ID                 int,
+   PLS_WEEK_NUM         int,
+   PLS_NUM              int,
+   PLS_NAME             nvarchar(50),
+   T_ID                 int,
+   PLS_TERM_NUM         INT,
+   primary key (PLS_ID)
+);
+
+/*==============================================================*/
+/* Table: SC_TEACHER_INFO                                       */
+/*==============================================================*/
+create table SC_TEACHER_INFO
+(
+   T_ID                 INT not null,
+   T_NAME               NVARCHAR(20),
+   T_SEX                nvarchar(2),
+   T_birthday           datetime,
+   T_TEACH_YEAR         int,
+   T_certification      nvarchar(50),
+   primary key (T_ID)
+);
+
+/*==============================================================*/
+/* Table: SC_TEACHER_SUBJECT                                    */
+/*==============================================================*/
+create table SC_TEACHER_SUBJECT
+(
+   TS_ID                int not null,
+   T_ID                 INT,
+   T_TYPE               int,
+   T_NAME               nvarchar(50),
+   primary key (TS_ID)
+);
+
+alter table SC_CLASS_INFO add constraint FK_Reference_5 foreign key (STU_ID)
+      references SC_STUDENT_INFO (STU_ID) on delete restrict on update restrict;
+
+alter table SC_CLASS_INFO add constraint FK_Reference_6 foreign key (S_ID)
+      references SC_SLN_INFO (S_ID) on delete restrict on update restrict;
+
+alter table SC_FIXED_CLASS_SLN add constraint FK_Reference_2 foreign key (S_ID)
+      references SC_SLN_INFO (S_ID) on delete restrict on update restrict;
+
+alter table SC_MOVE_CLASS_SLN add constraint FK_Reference_3 foreign key (S_ID)
+      references SC_SLN_INFO (S_ID) on delete restrict on update restrict;
+
+alter table SC_STUDENT_SELECT add constraint FK_Reference_1 foreign key (STU_ID)
+      references SC_STUDENT_INFO (STU_ID) on delete restrict on update restrict;
+
+alter table SC_TEACHER_SUBJECT add constraint FK_Reference_4 foreign key (T_ID)
+      references SC_TEACHER_INFO (T_ID) on delete restrict on update restrict;
+	  
+	  
+-------------------------------------------------------------------------------------------	  
+----2019年4月7日 09:14:01
+
+alter table SC_CLASS_INFO drop foreign key FK_Reference_5;
+alter table SC_CLASS_INFO drop foreign key FK_Reference_6;
+alter table SC_FIXED_CLASS_SLN drop foreign key FK_Reference_2;
+alter table SC_MOVE_CLASS_SLN drop foreign key FK_Reference_3;
+alter table SC_STUDENT_SELECT drop foreign key FK_Reference_1;
+alter table SC_TEACHER_SUBJECT drop foreign key FK_Reference_4;
+
+alter table SC_BASE_dictionary modify BD_ID int(11) auto_increment;
+alter table SC_MOVE_CLASS_SLN modify MCS_ID int(11) auto_increment;
+alter table SC_FIXED_CLASS_SLN modify FCS_ID int(11) auto_increment;
+alter table SC_CLASS_INFO modify C_ID int(11) auto_increment;
+alter table SC_SLN_INFO modify S_ID int(11) auto_increment;
+alter table SC_STUDENT_SELECT modify ID int(11) auto_increment;
+alter table SC_STUDENT_INFO modify STU_ID int(11) auto_increment;
+alter table SC_TEACHER_INFO modify T_ID int(11) auto_increment;
+alter table SC_TEACHER_SUBJECT modify TS_ID int(11) auto_increment;
+alter table SC_SUBJECT_LIST_PLAN modify PLS_ID int(11) auto_increment;
+
+
+alter table SC_CLASS_INFO add constraint FK_Reference_5 foreign key (STU_ID)
+      references SC_STUDENT_INFO (STU_ID) on delete restrict on update restrict;
+
+alter table SC_CLASS_INFO add constraint FK_Reference_6 foreign key (S_ID)
+      references SC_SLN_INFO (S_ID) on delete restrict on update restrict;
+
+alter table SC_FIXED_CLASS_SLN add constraint FK_Reference_2 foreign key (S_ID)
+      references SC_SLN_INFO (S_ID) on delete restrict on update restrict;
+
+alter table SC_MOVE_CLASS_SLN add constraint FK_Reference_3 foreign key (S_ID)
+      references SC_SLN_INFO (S_ID) on delete restrict on update restrict;
+
+alter table SC_STUDENT_SELECT add constraint FK_Reference_1 foreign key (STU_ID)
+      references SC_STUDENT_INFO (STU_ID) on delete restrict on update restrict;
+
+alter table SC_TEACHER_SUBJECT add constraint FK_Reference_4 foreign key (T_ID)
+      references SC_TEACHER_INFO (T_ID) on delete restrict on update restrict;
+	  
+
