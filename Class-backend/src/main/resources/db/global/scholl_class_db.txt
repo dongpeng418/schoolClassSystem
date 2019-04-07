@@ -356,5 +356,8 @@ alter table SC_STUDENT_INFO drop  column stu_ ;
 
 --2019年4月7日 12:38:30  dongpp  修改sc密码长度
 alter table sc_user  modify column password varchar(128);
+
+--2019年4月7日 14:05:30  dongpp  修改sc密码长度
+alter table SC_SLN_INFO add column S_Type int(6);
 	  
 

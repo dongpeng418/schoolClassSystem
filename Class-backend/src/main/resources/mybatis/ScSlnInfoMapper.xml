@@ -4,9 +4,10 @@
   <resultMap id="BaseResultMap" type="cn.com.school.classinfo.model.ScSlnInfo">
     <id column="S_ID" jdbcType="INTEGER" property="sId" />
     <result column="S_NAME" jdbcType="VARCHAR" property="sName" />
+    <result column="S_Type" jdbcType="INTEGER" property="sType" />
   </resultMap>
   <sql id="Base_Column_List">
-    S_ID, S_NAME
+    S_ID, S_NAME, S_Type
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -14,13 +15,21 @@
     from sc_sln_info
     where S_ID = #{sId,jdbcType=INTEGER}
   </select>
+  <select id="selectAllDatas" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sc_sln_info
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sc_sln_info
     where S_ID = #{sId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.com.school.classinfo.model.ScSlnInfo">
-    insert into sc_sln_info (S_ID, S_NAME)
-    values (#{sId,jdbcType=INTEGER}, #{sName,jdbcType=VARCHAR})
+    insert into sc_sln_info (S_ID, S_NAME, S_Type
+      )
+    values (#{sId,jdbcType=INTEGER}, #{sName,jdbcType=VARCHAR}, #{sType,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.com.school.classinfo.model.ScSlnInfo">
     insert into sc_sln_info
@@ -31,6 +40,9 @@
       <if test="sName != null">
         S_NAME,
       </if>
+      <if test="sType != null">
+        S_Type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="sId != null">
@@ -38,6 +50,9 @@
       </if>
       <if test="sName != null">
         #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sType != null">
+        #{sType,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -47,12 +62,16 @@
       <if test="sName != null">
         S_NAME = #{sName,jdbcType=VARCHAR},
       </if>
+      <if test="sType != null">
+        S_Type = #{sType,jdbcType=INTEGER},
+      </if>
     </set>
     where S_ID = #{sId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.com.school.classinfo.model.ScSlnInfo">
     update sc_sln_info
-    set S_NAME = #{sName,jdbcType=VARCHAR}
+    set S_NAME = #{sName,jdbcType=VARCHAR},
+      S_Type = #{sType,jdbcType=INTEGER}
     where S_ID = #{sId,jdbcType=INTEGER}
   </update>
 </mapper>

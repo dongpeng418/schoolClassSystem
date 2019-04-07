@@ -5,6 +5,8 @@ public class ScSlnInfo {
 
     private String sName;
 
+    private Integer sType;
+
     public Integer getsId() {
         return sId;
     }
@@ -19,5 +21,13 @@ public class ScSlnInfo {
 
     public void setsName(String sName) {
         this.sName = sName == null ? null : sName.trim();
+    }
+
+    public Integer getsType() {
+        return sType;
+    }
+
+    public void setsType(Integer sType) {
+        this.sType = sType;
     }
 }

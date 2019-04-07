@@ -33,9 +33,9 @@
         </javaClientGenerator>
 
 
-        <table tableName="sc_student_info"
-               domainObjectName="ScStudentInfo"
-               mapperName="ScStudentInfoMapper"
+        <table tableName="sc_sln_info"
+               domainObjectName="ScSlnInfo"
+               mapperName="ScSlnInfoMapper"
                enableSelectByExample="false"
                enableDeleteByExample="false"
                enableCountByExample="false"

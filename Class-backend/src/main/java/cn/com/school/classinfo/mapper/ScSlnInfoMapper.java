@@ -1,5 +1,7 @@
 package cn.com.school.classinfo.mapper;
 
+import java.util.List;
+
 import cn.com.school.classinfo.model.ScSlnInfo;
 
 public interface ScSlnInfoMapper {
@@ -14,4 +16,6 @@ public interface ScSlnInfoMapper {
     int updateByPrimaryKeySelective(ScSlnInfo record);
 
     int updateByPrimaryKey(ScSlnInfo record);
+
+    List<ScSlnInfo> selectAllDatas();
 }
