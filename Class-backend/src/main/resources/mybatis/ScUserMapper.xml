@@ -139,4 +139,17 @@
       current_login_date = #{currentLoginDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <insert id="batchInsert" parameterType="cn.com.school.classinfo.model.ScUser" useGeneratedKeys="true"
+            keyProperty="id">
+      insert into sc_user (user_type, user_id, 
+      login_user, password, created_id, 
+      created_time)
+      values
+      <foreach collection='list' item='item' separator=','>
+       (#{item.userType,jdbcType=INTEGER}, #{item.userId,jdbcType=INTEGER}, 
+        #{item.loginUser,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, 'system', now()
+      )
+      </foreach>
+  </insert>
 </mapper>

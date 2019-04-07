@@ -16,14 +16,24 @@
     from sc_base_dictionary
     where BD_ID = #{bdId,jdbcType=INTEGER}
   </select>
+  
+  <select id="queryByTypeAndName"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sc_base_dictionary
+    where BD_TYPE = #{type,jdbcType=VARCHAR}
+    and BD_NAME = #{name,jdbcType=VARCHAR}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sc_base_dictionary
     where BD_ID = #{bdId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.com.school.classinfo.model.ScBaseDictionary">
-    insert into sc_base_dictionary (BD_ID, BD_NAME, BD_TYPE, 
+  <insert id="insert" parameterType="cn.com.school.classinfo.model.ScBaseDictionary" useGeneratedKeys="true"
+            keyProperty="bdId">
+    insert into sc_base_dictionary (BD_NAME, BD_TYPE, 
       BD_VALUE)
-    values (#{bdId,jdbcType=INTEGER}, #{bdName,jdbcType=VARCHAR}, #{bdType,jdbcType=VARCHAR}, 
+    values (#{bdName,jdbcType=VARCHAR}, #{bdType,jdbcType=VARCHAR}, 
       #{bdValue,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.com.school.classinfo.model.ScBaseDictionary">

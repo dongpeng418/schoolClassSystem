@@ -47,3 +47,6 @@ logging:
       cityre:
         admin:
           mapper: debug
+file: 
+  studentInfo: 
+      basPath: D:\self\upload\

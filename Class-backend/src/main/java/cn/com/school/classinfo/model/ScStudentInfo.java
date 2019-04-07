@@ -2,74 +2,32 @@ package cn.com.school.classinfo.model;
 
 import java.util.Date;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
+import lombok.Data;
+
+@Data
 public class ScStudentInfo {
+
     private Integer stuId;
 
+    @Excel(name = "学号")
     private String stuNo;
 
-    private String stuNum;
-
+    @Excel(name = "性别")
     private String stuSex;
 
-    private Date stu;
-
+    @Excel(name = "联系方式")
     private String stuPhone;
 
     private Integer stuPubId;
 
-    public Integer getStuId() {
-        return stuId;
-    }
+    @Excel(name = "所属行政班")
+    private String stuPubName;//行政班
 
-    public void setStuId(Integer stuId) {
-        this.stuId = stuId;
-    }
+    @Excel(name = "姓名")
+    private String stuName;
 
-    public String getStuNo() {
-        return stuNo;
-    }
+    @Excel(name = "出生年月")
+    private Date stuBirthday;
 
-    public void setStuNo(String stuNo) {
-        this.stuNo = stuNo == null ? null : stuNo.trim();
-    }
-
-    public String getStuNum() {
-        return stuNum;
-    }
-
-    public void setStuNum(String stuNum) {
-        this.stuNum = stuNum == null ? null : stuNum.trim();
-    }
-
-    public String getStuSex() {
-        return stuSex;
-    }
-
-    public void setStuSex(String stuSex) {
-        this.stuSex = stuSex == null ? null : stuSex.trim();
-    }
-
-    public Date getStu() {
-        return stu;
-    }
-
-    public void setStu(Date stu) {
-        this.stu = stu;
-    }
-
-    public String getStuPhone() {
-        return stuPhone;
-    }
-
-    public void setStuPhone(String stuPhone) {
-        this.stuPhone = stuPhone == null ? null : stuPhone.trim();
-    }
-
-    public Integer getStuPubId() {
-        return stuPubId;
-    }
-
-    public void setStuPubId(Integer stuPubId) {
-        this.stuPubId = stuPubId;
-    }
 }

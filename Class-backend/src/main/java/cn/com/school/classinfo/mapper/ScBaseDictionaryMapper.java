@@ -1,5 +1,7 @@
 package cn.com.school.classinfo.mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 import cn.com.school.classinfo.model.ScBaseDictionary;
 
 public interface ScBaseDictionaryMapper {
@@ -14,4 +16,6 @@ public interface ScBaseDictionaryMapper {
     int updateByPrimaryKeySelective(ScBaseDictionary record);
 
     int updateByPrimaryKey(ScBaseDictionary record);
+
+    ScBaseDictionary queryByTypeAndName(@Param("name") String name,@Param("type") String type);
 }

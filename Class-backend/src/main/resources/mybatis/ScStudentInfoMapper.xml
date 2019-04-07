@@ -4,14 +4,14 @@
   <resultMap id="BaseResultMap" type="cn.com.school.classinfo.model.ScStudentInfo">
     <id column="STU_ID" jdbcType="INTEGER" property="stuId" />
     <result column="stu_no" jdbcType="VARCHAR" property="stuNo" />
-    <result column="stu_num" jdbcType="VARCHAR" property="stuNum" />
     <result column="stu_sex" jdbcType="VARCHAR" property="stuSex" />
-    <result column="stu_" jdbcType="TIMESTAMP" property="stu" />
     <result column="stu_phone" jdbcType="VARCHAR" property="stuPhone" />
     <result column="stu_PUB_ID" jdbcType="INTEGER" property="stuPubId" />
+    <result column="stu_name" jdbcType="VARCHAR" property="stuName" />
+    <result column="stu_birthday" jdbcType="DATE" property="stuBirthday" />
   </resultMap>
   <sql id="Base_Column_List">
-    STU_ID, stu_no, stu_num, stu_sex, stu_, stu_phone, stu_PUB_ID
+    STU_ID, stu_no, stu_sex, stu_phone, stu_PUB_ID, stu_name, stu_birthday
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -24,12 +24,12 @@
     where STU_ID = #{stuId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.com.school.classinfo.model.ScStudentInfo">
-    insert into sc_student_info (STU_ID, stu_no, stu_num, 
-      stu_sex, stu_, stu_phone, 
-      stu_PUB_ID)
-    values (#{stuId,jdbcType=INTEGER}, #{stuNo,jdbcType=VARCHAR}, #{stuNum,jdbcType=VARCHAR}, 
-      #{stuSex,jdbcType=VARCHAR}, #{stu,jdbcType=TIMESTAMP}, #{stuPhone,jdbcType=VARCHAR}, 
-      #{stuPubId,jdbcType=INTEGER})
+    insert into sc_student_info (STU_ID, stu_no, stu_sex, 
+      stu_phone, stu_PUB_ID, stu_name, 
+      stu_birthday)
+    values (#{stuId,jdbcType=INTEGER}, #{stuNo,jdbcType=VARCHAR}, #{stuSex,jdbcType=VARCHAR}, 
+      #{stuPhone,jdbcType=VARCHAR}, #{stuPubId,jdbcType=INTEGER}, #{stuName,jdbcType=VARCHAR}, 
+      #{stuBirthday,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="cn.com.school.classinfo.model.ScStudentInfo">
     insert into sc_student_info
@@ -40,20 +40,20 @@
       <if test="stuNo != null">
         stu_no,
       </if>
-      <if test="stuNum != null">
-        stu_num,
-      </if>
       <if test="stuSex != null">
         stu_sex,
-      </if>
-      <if test="stu != null">
-        stu_,
       </if>
       <if test="stuPhone != null">
         stu_phone,
       </if>
       <if test="stuPubId != null">
         stu_PUB_ID,
+      </if>
+      <if test="stuName != null">
+        stu_name,
+      </if>
+      <if test="stuBirthday != null">
+        stu_birthday,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -63,20 +63,20 @@
       <if test="stuNo != null">
         #{stuNo,jdbcType=VARCHAR},
       </if>
-      <if test="stuNum != null">
-        #{stuNum,jdbcType=VARCHAR},
-      </if>
       <if test="stuSex != null">
         #{stuSex,jdbcType=VARCHAR},
-      </if>
-      <if test="stu != null">
-        #{stu,jdbcType=TIMESTAMP},
       </if>
       <if test="stuPhone != null">
         #{stuPhone,jdbcType=VARCHAR},
       </if>
       <if test="stuPubId != null">
         #{stuPubId,jdbcType=INTEGER},
+      </if>
+      <if test="stuName != null">
+        #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="stuBirthday != null">
+        #{stuBirthday,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -86,14 +86,8 @@
       <if test="stuNo != null">
         stu_no = #{stuNo,jdbcType=VARCHAR},
       </if>
-      <if test="stuNum != null">
-        stu_num = #{stuNum,jdbcType=VARCHAR},
-      </if>
       <if test="stuSex != null">
         stu_sex = #{stuSex,jdbcType=VARCHAR},
-      </if>
-      <if test="stu != null">
-        stu_ = #{stu,jdbcType=TIMESTAMP},
       </if>
       <if test="stuPhone != null">
         stu_phone = #{stuPhone,jdbcType=VARCHAR},
@@ -101,17 +95,38 @@
       <if test="stuPubId != null">
         stu_PUB_ID = #{stuPubId,jdbcType=INTEGER},
       </if>
+      <if test="stuName != null">
+        stu_name = #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="stuBirthday != null">
+        stu_birthday = #{stuBirthday,jdbcType=DATE},
+      </if>
     </set>
     where STU_ID = #{stuId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.com.school.classinfo.model.ScStudentInfo">
     update sc_student_info
     set stu_no = #{stuNo,jdbcType=VARCHAR},
-      stu_num = #{stuNum,jdbcType=VARCHAR},
       stu_sex = #{stuSex,jdbcType=VARCHAR},
-      stu_ = #{stu,jdbcType=TIMESTAMP},
       stu_phone = #{stuPhone,jdbcType=VARCHAR},
-      stu_PUB_ID = #{stuPubId,jdbcType=INTEGER}
+      stu_PUB_ID = #{stuPubId,jdbcType=INTEGER},
+      stu_name = #{stuName,jdbcType=VARCHAR},
+      stu_birthday = #{stuBirthday,jdbcType=DATE}
     where STU_ID = #{stuId,jdbcType=INTEGER}
   </update>
+  
+  <insert id="batchInsert" parameterType="cn.com.school.classinfo.model.ScStudentInfo" useGeneratedKeys="true"
+            keyProperty="stuId">
+      insert into sc_student_info (stu_no, stu_sex, 
+      stu_phone, stu_PUB_ID, stu_name, 
+      stu_birthday)
+      values
+      <foreach collection='list' item='item' separator=','>
+        (
+        #{item.stuNo,jdbcType=VARCHAR}, #{item.stuSex,jdbcType=VARCHAR}, 
+        #{item.stuPhone,jdbcType=VARCHAR}, #{item.stuPubId,jdbcType=INTEGER}, #{item.stuName,jdbcType=VARCHAR}, 
+        #{item.stuBirthday,jdbcType=DATE}
+        )
+      </foreach>
+  </insert>
 </mapper>

@@ -32,9 +32,19 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="sc_base_dictionary"
-               domainObjectName="ScBaseDictionary"
-               mapperName="ScBaseDictionaryMapper"
+
+        <table tableName="sc_student_info"
+               domainObjectName="ScStudentInfo"
+               mapperName="ScStudentInfoMapper"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- <table tableName="sc_user"
+               domainObjectName="ScUser"
+               mapperName="ScUserMapper"
                enableSelectByExample="false"
                enableDeleteByExample="false"
                enableCountByExample="false"
@@ -130,6 +140,6 @@
                enableCountByExample="false"
                enableUpdateByExample="false"
                selectByExampleQueryId="false">
-        </table>
+        </table> -->
     </context>
 </generatorConfiguration>
