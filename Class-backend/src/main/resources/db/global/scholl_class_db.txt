@@ -330,5 +330,9 @@ alter table SC_STUDENT_SELECT add constraint FK_Reference_1 foreign key (STU_ID)
 
 alter table SC_TEACHER_SUBJECT add constraint FK_Reference_4 foreign key (T_ID)
       references SC_TEACHER_INFO (T_ID) on delete restrict on update restrict;
+----------------------------------------------------------------------------      
+--2019年4月7日 09:22:56  
+alter table SC_STUDENT_INFO add  column stu_name varchar(16);
+alter table SC_STUDENT_INFO drop  column stu_num;    
 	  
 
