@@ -14,11 +14,17 @@ import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,12 +60,22 @@ public class ScStudentController {
     @Value("${file.studentInfo.basPath}")
     private String basePath;
 
+    /**
+     * 模板文件名
+     */
+    public static final String TEMPLATE_NAME = "student_template.xlsx";
+
+    /**
+     * 模板下载文件名称
+     */
+    public static final String TEMPLATE_DOWNLOAD_NAME = "学生信息批量导入模板.xlsx";
+
     @Autowired
     private ScStudentService scStudentService;
 
     @ApiOperation(value = "excel导入学生信息")
     @PostMapping("/upload")
-    public ResultMessage upload(@ApiParam(value = "学生信息文件", required = true)
+    public ResultMessage upload(@ApiParam(value = "学生信息文件,返回用户信息，enablePassword 6位随机密码，登录后必须修改才能操作", required = true)
     @RequestParam MultipartFile file) {
         if (file.isEmpty()) {
             return ResultMessage.paramError("file");
@@ -102,6 +118,37 @@ public class ScStudentController {
         List<ScUser> reslutUsers  = scStudentService.saveBatch(uploadInfos);
 
         return ResultMessage.success().data(reslutUsers);
+    }
+
+    /**
+     * 模板文件下载
+     *
+     * @return 模板文件
+     * @throws IOException 读文件异常
+     */
+    @ApiOperation(value = "学生信息导入模板下载")
+    @GetMapping("/download/template")
+    public ResponseEntity batchTemplate() throws IOException {
+        String filePath = basePath  + TEMPLATE_NAME;
+        File file = new File(filePath);
+        if (!file.exists()) {
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body("file not found");
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, FileUtil.getFileDownloadHeader(TEMPLATE_DOWNLOAD_NAME));
+        headers.setContentLength(file.length());
+        byte[] bytes;
+        try {
+            bytes = FileUtils.readFileToByteArray(file);
+        } catch (IOException e) {
+            log.error("read file error, file path: {}", filePath);
+            throw new IOException(e);
+        }
+        return ResponseEntity
+                        .ok()
+                        .headers(headers)
+                        .body(bytes);
     }
 
     /**
