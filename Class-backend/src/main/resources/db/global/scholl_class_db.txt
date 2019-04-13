@@ -359,5 +359,35 @@ alter table sc_user  modify column password varchar(128);
 
 --2019年4月7日 14:05:30  dongpp  修改sc密码长度
 alter table SC_SLN_INFO add column S_Type int(6);
-	  
 
+--2019年4月8日 00:01:06
+drop table if exists SC_CLASS_INFO;
+
+/*==============================================================*/
+/* Table: SC_CLASS_INFO                                         */
+/*==============================================================*/
+create table SC_CLASS_INFO
+(
+   C_ID                 int not null,
+   C_CLASS_NAME         nvarchar(20),
+   STU_ID               int,
+   C_TYPE               int,
+   C_CLASS_ID           nvarchar(20),
+   primary key (C_ID)
+);
+-------------------------------------------------------
+create table sc_cls_num_list
+(
+   cnl_id               int not null,
+   min_num              decimal(10,1),
+   avg_num              decimal(10,1),
+   max_num              decimal(10,1),
+   total_num            decimal(10,1),
+   class_num            decimal(10,1),
+   create_time          datetime,
+   primary key (cnl_id)
+);
+alter table sc_cls_num_list modify cnl_id int(11) auto_increment;
+-------------------------------------------------------
+-- 2019年4月13日 16:39:32
+alter table SC_TEACHER_INFO add T_TEACHER_NO NVARCHAR(20)
