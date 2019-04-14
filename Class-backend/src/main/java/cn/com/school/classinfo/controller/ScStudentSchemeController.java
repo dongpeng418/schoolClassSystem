@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author 禧泰_董鹏鹏
+ * @author dongpp
  *
  */
 @Api(tags = "学生选班方案相关接口")

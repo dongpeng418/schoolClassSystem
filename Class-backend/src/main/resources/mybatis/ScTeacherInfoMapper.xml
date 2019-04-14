@@ -8,9 +8,10 @@
     <result column="T_birthday" jdbcType="TIMESTAMP" property="tBirthday" />
     <result column="T_TEACH_YEAR" jdbcType="INTEGER" property="tTeachYear" />
     <result column="T_certification" jdbcType="VARCHAR" property="tCertification" />
+    <result column="T_TEACHER_NO" jdbcType="VARCHAR" property="tTeacherNo" />
   </resultMap>
   <sql id="Base_Column_List">
-    T_ID, T_NAME, T_SEX, T_birthday, T_TEACH_YEAR, T_certification
+    T_ID, T_NAME, T_SEX, T_birthday, T_TEACH_YEAR, T_certification,T_TEACHER_NO
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -29,6 +30,17 @@
     values (#{tId,jdbcType=INTEGER}, #{tName,jdbcType=VARCHAR}, #{tSex,jdbcType=VARCHAR}, 
       #{tBirthday,jdbcType=TIMESTAMP}, #{tTeachYear,jdbcType=INTEGER}, #{tCertification,jdbcType=VARCHAR}
       )
+  </insert>
+  
+  <insert id="batchInsert" parameterType="cn.com.school.classinfo.model.ScTeacherInfo" useGeneratedKeys="true"
+            keyProperty="tId">
+      insert into sc_teacher_info (T_TEACHER_NO,T_NAME, T_SEX, 
+      T_birthday, T_TEACH_YEAR, T_certification
+      ) values
+      <foreach collection='list' item='item' separator=','>
+        (#{item.tTeacherNo,jdbcType=VARCHAR},#{item.tName,jdbcType=VARCHAR}, #{item.tSex,jdbcType=VARCHAR}, 
+      #{item.tBirthday,jdbcType=TIMESTAMP}, #{item.tTeachYear,jdbcType=INTEGER}, #{item.tCertification,jdbcType=VARCHAR})
+      </foreach>
   </insert>
   <insert id="insertSelective" parameterType="cn.com.school.classinfo.model.ScTeacherInfo">
     insert into sc_teacher_info

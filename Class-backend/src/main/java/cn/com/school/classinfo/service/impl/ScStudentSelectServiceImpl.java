@@ -13,7 +13,7 @@ import cn.com.school.classinfo.service.ScStudentSelectService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author 禧泰_董鹏鹏
+ * @author dongpp
  *
  */
 @Slf4j

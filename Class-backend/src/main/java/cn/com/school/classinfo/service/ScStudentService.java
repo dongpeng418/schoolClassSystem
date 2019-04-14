@@ -9,7 +9,7 @@ import cn.com.school.classinfo.model.ScStudentInfo;
 import cn.com.school.classinfo.model.ScUser;
 
 /**
- * @author 禧泰_董鹏鹏
+ * @author dongpp
  *
  */
 public interface ScStudentService {
